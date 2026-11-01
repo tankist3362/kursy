@@ -44,6 +44,13 @@ button{font:inherit;font-size:16px;color:var(--accent);background:var(--panel);b
 .place a{color:var(--accent)}
 .more{font-size:13px;color:var(--muted);margin-top:8px}
 .more a{color:var(--accent)}
+.offer{padding:10px 14px;border-top:1px solid var(--line);font-size:14px;line-height:1.4}
+.offer .top .rate{font-size:22px}
+.offer .who{font-weight:600}
+.offer .txt{color:var(--muted);font-size:13px;margin-top:4px}
+.rep{display:inline-block;font-size:12px;border-radius:6px;padding:1px 6px;background:var(--soft);color:var(--ink)}
+.rep.low{background:var(--warnBg);color:var(--warn)}
+.side-h{font-size:15px;color:var(--muted);padding:10px 14px 2px}
 </style></head><body>
 <div class="wrap">
   <h1>Калькулятор валют</h1>
@@ -77,7 +84,8 @@ button{font:inherit;font-size:16px;color:var(--accent);background:var(--panel);b
   <h2>Лучшие курсы наличными</h2>
   <div class="tabs" role="tablist">
     <button type="button" role="tab" id="t-minsk" aria-selected="true">Минск</button>
-    <button type="button" role="tab" id="t-moscow" aria-selected="false">Москва</button>
+    <button type="button" role="tab" id="t-moscow" aria-selected="false">Москва, банки</button>
+    <button type="button" role="tab" id="t-tg" aria-selected="false">Москва, обменники</button>
   </div>
   <div id="rates"><div class="meta">Загружаю курсы…</div></div>
 </div>
@@ -146,9 +154,10 @@ function sideHtml(c,code,r,side){
 }
 function ageHours(t){if(!t)return 99;const d=new Date(t.replace(" ","T")+":00+03:00");return (Date.now()-d)/36e5}
 function render(){
-  ["minsk","moscow"].forEach(c=>$("t-"+c).setAttribute("aria-selected",String(c===city)));
+  ["minsk","moscow","tg"].forEach(c=>$("t-"+c).setAttribute("aria-selected",String(c===city)));
   const box=$("rates");
   if(!DATA){box.innerHTML='<div class="warn">Курсы не загрузились. Калькулятор работает, курс можно ввести вручную.</div>';return}
+  if(city==="tg"){renderTg(box);return}
   const d=DATA[city]||{};const R=d.rates||{};
   const order=city==="minsk"?["RUB","USD","EUR"]:["USD","EUR"];
   let h=`<div class="meta">Обновлено ${esc(d.updated||"—")} (МСК), источник ${esc(d.source||"")}. ${city==="minsk"?"Курсы в BYN, только отделения банков.":"Курсы в RUB, отделения банков Москвы."}</div>`;
@@ -163,6 +172,34 @@ function render(){
 }
 $("t-minsk").addEventListener("click",()=>{city="minsk";render();save()});
 $("t-moscow").addEventListener("click",()=>{city="moscow";render();save()});
+$("t-tg").addEventListener("click",()=>{city="tg";render();save()});
+
+function offerHtml(o,code,side,hist){
+  const who=o.user?`<a href="https://t.me/${esc(o.user.slice(1))}" target="_blank" rel="noopener">${esc(o.user)}</a>`:esc(o.name||"без имени");
+  const rep=`<span class="rep${o.days<3?" low":""}">в чате ${o.days} из ${hist} дн.</span>`;
+  const bits=[o.time];if(o.metro)bits.push("м. "+esc(o.metro));
+  return `<div class="offer"><div class="top"><span class="what"><span class="who">${who}</span> ${rep}<br><small>${bits.join(", ")}</small></span><span class="rate">${fmt(o.rate,2)}</span>
+  <button type="button" class="use" data-c="${code}" data-per="1" data-q="RUB" data-v="${o.rate}" data-s="${side}">Подставить</button></div>
+  <div class="txt">${esc(o.text)} <a href="${esc(o.link)}" target="_blank" rel="noopener">сообщение</a></div></div>`;
+}
+function renderTg(box){
+  const d=DATA.moscow_tg;
+  const err=(DATA.errors||[]).filter(e=>e.startsWith("Telegram"));
+  let h="";
+  if(!d){h=`<div class="warn">${err.length?esc(err.join("; ")):"Чат обменников ещё не подключён."}</div>`;box.innerHTML=h;return}
+  h+=`<div class="meta">Обновлено ${esc(d.updated)} (МСК), чат ${esc(d.source)}: за сутки ${d.offers} объявлений с курсом. От каждого автора — его лучшее объявление.</div>`;
+  h+=`<div class="warn">Это частные объявления. «В чате N из ${d.history_days} дн.» — сколько дней автор публиковался за последнюю неделю: постоянные обменники пишут каждый день, новички — повод быть осторожнее. Проверяйте продавца и купюры на месте.</div>`;
+  if(ageHours(d.updated)>3)h+=`<div class="warn">Объявления не обновлялись больше 3 часов.</div>`;
+  if(err.length)h+=`<div class="warn">Последнее обновление с ошибкой: ${esc(err.join("; "))}</div>`;
+  for(const code of ["USD","EUR"]){const r=(d.rates||{})[code];if(!r)continue;
+    const s=(r.sell||[]),b=(r.buy||[]);if(!s.length&&!b.length)continue;
+    h+=`<div class="cx"><h3>${NAMES[code]}</h3>`;
+    if(s.length)h+=`<div class="side-h">Купить ${code} — продают, дешевле сверху</div>`+s.map(o=>offerHtml(o,code,"sell",d.history_days)).join("");
+    if(b.length)h+=`<div class="side-h">Продать ${code} — покупают, дороже сверху</div>`+b.map(o=>offerHtml(o,code,"buy",d.history_days)).join("");
+    h+=`</div>`}
+  box.innerHTML=h;
+  box.querySelectorAll("button.use").forEach(bt=>bt.addEventListener("click",()=>useRate(bt.dataset.c,+bt.dataset.per,bt.dataset.q,+bt.dataset.v,bt.dataset.s)));
+}
 
 const FALLBACK=null; /*FALLBACK*/
 (async()=>{

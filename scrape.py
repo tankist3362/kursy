@@ -162,7 +162,9 @@ def moscow_currency(code):
 def main():
     old = json.loads(OUT.read_text("utf-8")) if OUT.exists() else {}
     now = datetime.datetime.now(MSK).strftime("%Y-%m-%d %H:%M")
-    data = {"minsk": old.get("minsk", {}), "moscow": old.get("moscow", {}), "errors": []}
+    data = dict(old)   # блок moscow_tg и прочее сохраняем, его обновляет tg_scrape.py
+    data["errors"] = [e for e in old.get("errors", []) if e.startswith("Telegram")]
+    data.setdefault("minsk", {}); data.setdefault("moscow", {})
 
     try:
         rates, n = minsk()
