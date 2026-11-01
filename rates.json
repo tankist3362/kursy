@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-01 21:03",
+  "updated": "2026-11-01 21:06",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -207,7 +207,7 @@
   }
  },
  "moscow": {
-  "updated": "2026-11-01 21:03",
+  "updated": "2026-11-01 21:06",
   "source": "ru.myfin.by",
   "rates": {
    "USD": {
