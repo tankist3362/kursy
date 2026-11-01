@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-01 20:23",
+  "updated": "2026-11-01 20:24",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -207,49 +207,56 @@
   }
  },
  "moscow": {
-  "updated": "2026-11-01 19:45",
-  "source": "banki.ru",
+  "updated": "2026-11-01 20:24",
+  "source": "ru.myfin.by",
   "rates": {
    "USD": {
     "per": 1,
     "quote": "RUB",
     "buy": {
      "rate": 82.4,
-     "count": 1,
+     "count": 3,
      "banks": [
+      "Авангард",
       "Банк 131"
      ],
      "places": [
       {
+       "bank": "Авангард",
+       "branch": "ДО 'Монетчиковский'",
+       "addr": "г. Москва, 3-й Монетчиковский пер., д.11 стр.1",
+       "updated": "01.11.2026 08:30",
+       "link": "https://ru.myfin.by/bank/avangard/departments-list/moskva?mode=map&search_string=%D0%94%D0%9E+%27%D0%9C%D0%BE%D0%BD%D0%B5%D1%82%D1%87%D0%B8%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%27"
+      },
+      {
        "bank": "Банк 131",
-       "branch": "ДО «Калужский»",
-       "addr": "Калужское шоссе, 22-й км, д 10, этаж 2",
-       "metro": "Корниловская",
-       "lat": 55.599458,
-       "lon": 37.474421,
-       "phone": "+7 (495) 147-71-95",
-       "updated": "2026-11-01 19:38",
-       "stock": null
+       "branch": "Дополнительный офис «Калужский»",
+       "addr": "вн.тер.г. муниципальный округ Коммунарка, шоссе Калужское, километр  22-й, дом 10, этаж 2, помещение № 2-1-048",
+       "updated": "01.11.2026 08:45",
+       "link": "https://ru.myfin.by/bank/bank-131/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%9A%D0%B0%D0%BB%D1%83%D0%B6%D1%81%D0%BA%D0%B8%D0%B9%C2%BB"
+      },
+      {
+       "bank": "Авангард",
+       "branch": "'Хамовники'",
+       "addr": "г. Москва, ул. Усачева, д. 35, стр. 1",
+       "updated": "01.11.2026 08:30",
+       "link": "https://ru.myfin.by/bank/avangard/departments-list/moskva?mode=map&search_string=%27%D0%A5%D0%B0%D0%BC%D0%BE%D0%B2%D0%BD%D0%B8%D0%BA%D0%B8%27"
       }
      ]
     },
     "sell": {
-     "rate": 81.1,
+     "rate": 80.99,
      "count": 1,
      "banks": [
-      "Ак Барс Банк"
+      "БыстроБанк"
      ],
      "places": [
       {
-       "bank": "Ак Барс Банк",
-       "branch": "м. Отрадное, ул. Хачатуряна, д. 20",
-       "addr": "ул Хачатуряна, д 20",
-       "metro": "Отрадное, Владыкино",
-       "lat": 55.862117,
-       "lon": 37.6044569,
-       "phone": "+7 (495) 134-05-91",
-       "updated": "2026-11-01 19:38",
-       "stock": null
+       "bank": "БыстроБанк",
+       "branch": "Московский филиал",
+       "addr": "ул. Валовая, д. 2-4/44, стр.1, помещение 6/1",
+       "updated": "31.10.2026 21:15",
+       "link": "https://ru.myfin.by/bank/bystrobank/departments-list/moskva?mode=map&search_string=%D0%9C%D0%BE%D1%81%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB"
       }
      ]
     }
@@ -258,61 +265,61 @@
     "per": 1,
     "quote": "RUB",
     "buy": {
-     "rate": 92.01,
-     "count": 2,
+     "rate": 92.15,
+     "count": 567,
      "banks": [
-      "Агророс Банк"
+      "Банк ВТБ"
      ],
      "places": [
       {
-       "bank": "Агророс Банк",
-       "branch": "м. Перово, Зеленый пр-кт, д. 20",
-       "addr": "Зелёный пр-кт, д 20",
-       "metro": "Перово, Новогиреево",
-       "lat": 55.750104,
-       "lon": 37.787309,
-       "phone": "+7 (499) 648-72-26",
-       "updated": "2026-11-01 19:40",
-       "stock": "В пункте свыше 10000 евро"
+       "bank": "Банк ВТБ",
+       "branch": "Дополнительный офис «Юго-Западный»",
+       "addr": "проспект Вернадского, 105к3",
+       "updated": "31.10.2026 21:15",
+       "link": "https://ru.myfin.by/bank/vtb/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%AE%D0%B3%D0%BE-%D0%97%D0%B0%D0%BF%D0%B0%D0%B4%D0%BD%D1%8B%D0%B9%C2%BB"
       },
       {
-       "bank": "Агророс Банк",
-       "branch": "м. Савеловская, ул. Расковой, д. 34, стр. 14",
-       "addr": "ул Расковой, д 34 стр 14",
-       "metro": "Савеловская",
-       "lat": 55.791486,
-       "lon": 37.581173,
-       "phone": "+7 (499) 648-72-26",
-       "updated": "2026-11-01 19:40",
-       "stock": "В пункте свыше 10000 евро"
+       "bank": "Банк ВТБ",
+       "branch": "Дополнительный офис «Южнобутовский»",
+       "addr": "69, Москва, 117042",
+       "updated": "31.10.2026 21:15",
+       "link": "https://ru.myfin.by/bank/vtb/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%AE%D0%B6%D0%BD%D0%BE%D0%B1%D1%83%D1%82%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%C2%BB"
+      },
+      {
+       "bank": "Банк ВТБ",
+       "branch": "Дополнительный офис «Южный»",
+       "addr": "Кировоградская улица, 14",
+       "updated": "31.10.2026 21:15",
+       "link": "https://ru.myfin.by/bank/vtb/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%AE%D0%B6%D0%BD%D1%8B%D0%B9%C2%BB"
       }
      ]
     },
     "sell": {
      "rate": 92.19,
-     "count": 1,
+     "count": 2,
      "banks": [
-      "Банк 131"
+      "Банк 131",
+      "БыстроБанк"
      ],
      "places": [
       {
+       "bank": "БыстроБанк",
+       "branch": "Московский филиал",
+       "addr": "ул. Валовая, д. 2-4/44, стр.1, помещение 6/1",
+       "updated": "31.10.2026 21:15",
+       "link": "https://ru.myfin.by/bank/bystrobank/departments-list/moskva?mode=map&search_string=%D0%9C%D0%BE%D1%81%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB"
+      },
+      {
        "bank": "Банк 131",
-       "branch": "ДО «Михалковский»",
-       "addr": "ул Михалковская, д 63Б стр 4",
-       "metro": "Коптево",
-       "lat": 55.835948,
-       "lon": 37.510322,
-       "phone": "+7 (495) 801-62-79",
-       "updated": "2026-11-01 19:40",
-       "stock": null
+       "branch": "Дополнительный офис «Михалковский»",
+       "addr": "ул. Михалковская, д. 63Б, строение 4",
+       "updated": "31.10.2026 15:15",
+       "link": "https://ru.myfin.by/bank/bank-131/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%9C%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%C2%BB"
       }
      ]
     }
    }
   }
  },
- "errors": [
-  "Москва USD (banki.ru): не JSON (13602 байт):  .gorizontal-vertikal {position: absolute;margin: auto;top: 0;right: 0;bottom: 0;left: 0;width: 66px;height: 66px;} var utm_set = null;; /* The empty line above",
-  "Москва EUR (banki.ru): не JSON (13602 байт):  .gorizontal-vertikal {position: absolute;margin: auto;top: 0;right: 0;bottom: 0;left: 0;width: 66px;height: 66px;} var utm_set = null;; /* The empty line above"
- ]
+ "errors": []
 }
