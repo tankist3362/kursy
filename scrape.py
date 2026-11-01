@@ -145,7 +145,7 @@ def moscow_currency(code):
             places.append({
                 "bank": bank,
                 "branch": (qs.get("search_string") or [""])[0].replace("\xa0", " "),
-                "addr": re.sub(r"^Москва,\s*", "", a.get_text(" ", strip=True)),
+                "addr": re.sub(r"^(г\.?\s*)?Москва,\s*", "", a.get_text(" ", strip=True)),
                 "updated": when,
                 "link": MYFIN + a["href"] if a.get("href", "").startswith("/") else None,
                 "buy": vals[0], "sell": vals[1],
