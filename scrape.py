@@ -116,7 +116,12 @@ def moscow_currency(code):
             "sortAttribute": sort, "order": order, "currencyId": MOS_IDS[code], "currencyCode": code,
             "regionUrl": "moskva", "regionId": 4, "isExchangeOffices": 0, "page": 1, "perPage": 100,
             "pagePath": "currencyCashCodeCity", "isPagination": "true"})
-        j = json.loads(get(f"{BANKI}/products/currencyNodejsApi/getBanksWithOffices/?{q}", xhr=True, referer=referer))
+        raw = get(f"{BANKI}/products/currencyNodejsApi/getBanksWithOffices/?{q}", xhr=True, referer=referer)
+        try:
+            j = json.loads(raw)
+        except ValueError:
+            snippet = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", raw))[:160]
+            raise ValueError(f"не JSON ({len(raw)} байт): {snippet}")
         for b in j.get("list", []):
             for o in b.get("exchangeOffices") or []:
                 ex = o.get("exchange") or {}
