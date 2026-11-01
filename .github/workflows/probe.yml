@@ -4,7 +4,5 @@ jobs:
   p:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
-          for u in https://ru.myfin.by/currency/usd/moskva https://myfin.by/currency/usd/moskva https://mainfin.ru/currency/usd/moskva https://www.vbr.ru/banki/kurs-valut/moskva/usd/ https://www.sravni.ru/valjuty/info/kurs-dollara-v-moskve/ https://kurs.com.ru/gorod/ https://www.banki.ru/products/currency/cash/usd/moskva/ https://ru.myfin.by/currency/moskva; do
-            out=$(curl -sL -A "$UA" -H "Accept-Language: ru" -m 30 -o /tmp/p -w "%{http_code} %{size_download}" "$u"); t=$(grep -o "<title>[^<]*" /tmp/p | head -1 | cut -c8-90); echo "$out | $u | $t"; done
+      - uses: actions/checkout@v4
+      - run: pip install beautifulsoup4 && python probe.py
