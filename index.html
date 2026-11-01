@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Калькулятор валют</title>
+<style>
+:root{--bg:#EEF1EC;--panel:#FFFFFF;--ink:#13261E;--muted:#5D6F66;--line:#C9D3CC;--accent:#1F6B4A;--soft:#E3EDE6;--board:#13261E;--boardText:#E9F5EE;--warn:#9A5B00;--warnBg:#FFF3DC;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0E1713;--panel:#16231D;--ink:#E3EEE7;--muted:#93A79C;--line:#2C3D35;--accent:#5FC495;--soft:#1D3028;--board:#05100B;--boardText:#9FF0C6;--warn:#F2B35B;--warnBg:#2E2414;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bahnschrift","DIN Alternate","Roboto Condensed","Arial Narrow",system-ui,sans-serif;display:flex;justify-content:center;padding:20px 14px 40px}
+.wrap{width:100%;max-width:440px}
+h1{font-size:22px;font-weight:600;margin:0 0 14px}
+h2{font-size:19px;font-weight:600;margin:26px 0 4px}
+.board{background:var(--board);color:var(--boardText);border-radius:14px;padding:18px 18px 14px;margin-bottom:16px}
+.board .res{font-size:40px;font-weight:600;letter-spacing:.5px;font-variant-numeric:tabular-nums;line-height:1.1;word-break:break-all}
+.board .sub{font-size:14px;opacity:.75;margin-top:6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px}
+label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+.row{display:flex;gap:8px;align-items:center}
+.eq{font-size:22px;color:var(--muted)}
+input,select{font:inherit;font-size:22px;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:8px;padding:10px;min-width:0}
+input{flex:1;font-variant-numeric:tabular-nums}
+select{font-size:18px}
+.cur{font-size:18px;width:58px;text-align:center;color:var(--muted)}
+input:focus,select:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.swap{display:flex;justify-content:center;margin:12px 0}
+button{font:inherit;font-size:16px;color:var(--accent);background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:8px 18px;cursor:pointer}
+.hint{font-size:13px;color:var(--muted);margin-top:8px}
+.meta{font-size:13px;color:var(--muted);margin-bottom:10px}
+.warn{font-size:14px;color:var(--warn);background:var(--warnBg);border-radius:8px;padding:8px 10px;margin-bottom:10px}
+.tabs{display:flex;gap:6px;margin:10px 0}
+.tabs button{flex:1;border-radius:8px;padding:10px}
+.tabs button[aria-selected=true]{background:var(--accent);color:var(--panel);border-color:var(--accent)}
+.cx{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}
+.cx h3{font-size:18px;font-weight:600;margin:0;padding:12px 14px 4px}
+.side{padding:8px 14px 12px;border-top:1px solid var(--line)}
+.side:first-of-type{border-top:0}
+.top{display:flex;align-items:baseline;gap:10px}
+.top .what{font-size:15px;color:var(--muted);flex:1}
+.top .rate{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.use{font-size:14px;padding:5px 12px}
+.place{font-size:14px;line-height:1.4;margin-top:8px;padding-left:10px;border-left:3px solid var(--soft)}
+.place b{font-weight:600}
+.place .s{color:var(--muted)}
+.place a{color:var(--accent)}
+.more{font-size:13px;color:var(--muted);margin-top:8px}
+.more a{color:var(--accent)}
+</style></head><body>
+<div class="wrap">
+  <h1>Калькулятор валют</h1>
+
+  <div class="board" aria-live="polite">
+    <div class="res" id="res">—</div>
+    <div class="sub" id="sub">Введите курс и сумму</div>
+  </div>
+
+  <div class="card">
+    <label for="rate">Курс, как в обменнике</label>
+    <div class="row">
+      <select id="n" aria-label="Количество единиц"><option>1</option><option>10</option><option selected>100</option><option>1000</option></select>
+      <select id="rf" aria-label="Валюта, за которую курс"></select>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <span class="eq">=</span>
+      <input id="rate" inputmode="decimal" placeholder="например 3,48">
+      <select id="rt" aria-label="Валюта курса"></select>
+    </div>
+  </div>
+
+  <div class="card">
+    <label for="a">Сумма</label>
+    <div class="row"><input id="a" inputmode="decimal" placeholder="0"><span class="cur" id="ca"></span></div>
+    <div class="swap"><button id="sw" type="button">Поменять местами</button></div>
+    <div class="row"><input id="b" inputmode="decimal" placeholder="0"><span class="cur" id="cb"></span></div>
+    <div class="hint">Пишите в любое поле — второе пересчитается.</div>
+  </div>
+
+  <h2>Лучшие курсы наличными</h2>
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" id="t-minsk" aria-selected="true">Минск</button>
+    <button type="button" role="tab" id="t-moscow" aria-selected="false">Москва</button>
+  </div>
+  <div id="rates"><div class="meta">Загружаю курсы…</div></div>
+</div>
+<script>
+const CUR=["RUB","BYN","USD","EUR"];
+const $=id=>document.getElementById(id);
+const rate=$("rate"),n=$("n"),rf=$("rf"),rt=$("rt"),a=$("a"),b=$("b");
+CUR.forEach(c=>{rf.add(new Option(c,c));rt.add(new Option(c,c))});
+rf.value="RUB";rt.value="BYN";
+let flip=false,last="a";
+const num=s=>{const v=parseFloat(String(s).replace(/\s/g,"").replace(",","."));return isFinite(v)?v:NaN};
+const fmt=(v,d=2)=>v.toLocaleString("ru-RU",{minimumFractionDigits:0,maximumFractionDigits:d}).replace(/ /g," ");
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function calc(){
+  const A=flip?rt.value:rf.value, B=flip?rf.value:rt.value;
+  $("ca").textContent=A;$("cb").textContent=B;
+  const R=num(rate.value),N=+n.value;
+  if(!(R>0)){$("res").textContent="—";$("sub").textContent="Введите курс или выберите его ниже";save();return}
+  const k=flip?N/R:R/N;
+  if(last==="a"){const v=num(a.value);b.value=isNaN(v)?"":fmt(v*k)}
+  else{const v=num(b.value);a.value=isNaN(v)?"":fmt(v/k)}
+  const va=num(a.value),vb=num(b.value),rateTxt=" по курсу "+N+" "+rf.value+" = "+fmt(R,6)+" "+rt.value;
+  if(isNaN(va)||isNaN(vb)){$("res").textContent="—";$("sub").textContent="Введите сумму"}
+  else if(last==="a"){$("res").textContent=fmt(vb)+" "+B;$("sub").textContent=fmt(va)+" "+A+rateTxt}
+  else{$("res").textContent=fmt(va)+" "+A;$("sub").textContent=fmt(vb)+" "+B+rateTxt}
+  save();
+}
+function save(){try{localStorage.setItem("fx-calc3",JSON.stringify({rate:rate.value,n:n.value,rf:rf.value,rt:rt.value,flip,city}))}catch(e){}}
+a.addEventListener("input",()=>{last="a";calc()});
+b.addEventListener("input",()=>{last="b";calc()});
+rate.addEventListener("input",calc);
+[n,rf,rt].forEach(e=>e.addEventListener("change",calc));
+$("sw").addEventListener("click",()=>{flip=!flip;[a.value,b.value]=[b.value,a.value];calc()});
+
+/* ---------- курсы ---------- */
+const NAMES={USD:"Доллар",EUR:"Евро",RUB:"Российский рубль",BYN:"Белорусский рубль"};
+const SRC={minsk:"https://select.by/minsk/kurs",moscow:"https://www.banki.ru/products/currency/cash/{c}/moskva/"};
+let DATA=null,city="minsk";
+
+function useRate(cur,per,quote,val,side){
+  n.value=String(per);rf.value=cur;rt.value=quote;rate.value=fmt(val,6);
+  // купить валюту: отдаёте quote, получаете cur; продать: отдаёте cur
+  const want=side==="sell";
+  if(flip!==want){flip=want;[a.value,b.value]=[b.value,a.value]}
+  last="a";calc();window.scrollTo({top:0,behavior:"smooth"});
+}
+function placeHtml(p,c){
+  const city_=c==="minsk"?"Минск":"Москва";
+  const map=(p.lat&&p.lon)?`https://yandex.ru/maps/?pt=${p.lon},${p.lat}&z=17&l=map`:`https://yandex.ru/maps/?text=${encodeURIComponent(city_+", "+p.addr)}`;
+  const bits=[];
+  if(p.metro)bits.push("м. "+esc(p.metro));
+  if(p.phone)bits.push(esc(p.phone));
+  if(p.updated)bits.push("курс от "+esc(p.updated.slice(8,10)+"."+p.updated.slice(5,7)+" "+p.updated.slice(11)));
+  if(p.stock)bits.push(esc(p.stock));
+  return `<div class="place"><b>${esc(p.bank)}</b>${p.branch?`, <span class="s">${esc(p.branch)}</span>`:""}<br>${esc(p.addr)} <a href="${map}" target="_blank" rel="noopener">на карте</a>${bits.length?`<br><span class="s">${bits.join(", ")}</span>`:""}</div>`;
+}
+function sideHtml(c,code,r,side){
+  const s=r[side];if(!s)return "";
+  const label=side==="sell"?`Купить ${code}`:`Продать ${code}`;
+  const unit=r.per>1?` за ${r.per} ${code}`:"";
+  const extra=s.count>s.places.length?`<div class="more">и ещё ${s.count-s.places.length} отд. с таким курсом${s.banks&&s.banks.length>1?" ("+esc(s.banks.join(", "))+")":""}, <a href="${SRC[c].replace("{c}",code.toLowerCase())}" target="_blank" rel="noopener">все на сайте</a></div>`:"";
+  return `<div class="side"><div class="top"><span class="what">${label}<br><small>в ${r.quote}${unit}</small></span><span class="rate">${fmt(s.rate,4)}</span>
+  <button type="button" class="use" data-c="${code}" data-per="${r.per}" data-q="${r.quote}" data-v="${s.rate}" data-s="${side}">Подставить</button></div>
+  ${s.places.map(p=>placeHtml(p,c)).join("")}${extra}</div>`;
+}
+function ageHours(t){if(!t)return 99;const d=new Date(t.replace(" ","T")+":00+03:00");return (Date.now()-d)/36e5}
+function render(){
+  ["minsk","moscow"].forEach(c=>$("t-"+c).setAttribute("aria-selected",String(c===city)));
+  const box=$("rates");
+  if(!DATA){box.innerHTML='<div class="warn">Курсы не загрузились. Калькулятор работает, курс можно ввести вручную.</div>';return}
+  const d=DATA[city]||{};const R=d.rates||{};
+  const order=city==="minsk"?["RUB","USD","EUR"]:["USD","EUR"];
+  let h=`<div class="meta">Обновлено ${esc(d.updated||"—")} (МСК), источник ${esc(d.source||"")}. ${city==="minsk"?"Курсы в BYN, только отделения банков.":"Курсы в RUB, обменные пункты банков."}</div>`;
+  if(DATA._fallback)h+=`<div class="warn">Свежие курсы не загрузились — показан сохранённый снимок.</div>`;
+  else if(ageHours(d.updated)>3)h+=`<div class="warn">Курсы не обновлялись больше 3 часов — перед поездкой проверьте на сайте.</div>`;
+  const err=(DATA.errors||[]).filter(e=>e.startsWith(city==="minsk"?"Минск":"Москва"));
+  if(err.length)h+=`<div class="warn">Последнее обновление с ошибкой: ${esc(err.join("; "))}</div>`;
+  for(const code of order){const r=R[code];if(!r)continue;
+    h+=`<div class="cx"><h3>${NAMES[code]}</h3>${sideHtml(city,code,r,"sell")}${sideHtml(city,code,r,"buy")}</div>`}
+  box.innerHTML=h;
+  box.querySelectorAll("button.use").forEach(bt=>bt.addEventListener("click",()=>useRate(bt.dataset.c,+bt.dataset.per,bt.dataset.q,+bt.dataset.v,bt.dataset.s)));
+}
+$("t-minsk").addEventListener("click",()=>{city="minsk";render();save()});
+$("t-moscow").addEventListener("click",()=>{city="moscow";render();save()});
+
+const FALLBACK=null; /*FALLBACK*/
+(async()=>{
+  try{const d=JSON.parse(localStorage.getItem("fx-calc3")||"null");if(d){rate.value=d.rate||"";n.value=d.n||"100";rf.value=d.rf||"RUB";rt.value=d.rt||"BYN";flip=!!d.flip;city=d.city||"minsk"}}catch(e){}
+  calc();
+  try{const r=await fetch("rates.json?"+Date.now(),{cache:"no-store"});if(!r.ok)throw 0;DATA=await r.json()}
+  catch(e){if(FALLBACK){DATA=FALLBACK;DATA._fallback=true}}
+  render();
+})();
+</script>
+</body></html>
