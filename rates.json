@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-01 20:09",
+  "updated": "2026-11-01 20:10",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -312,7 +312,7 @@
   }
  },
  "errors": [
-  "Москва USD (banki.ru): Expecting value: line 1 column 1 (char 0)",
-  "Москва EUR (banki.ru): Expecting value: line 1 column 1 (char 0)"
+  "Москва USD (banki.ru): не JSON (13602 байт):  .gorizontal-vertikal {position: absolute;margin: auto;top: 0;right: 0;bottom: 0;left: 0;width: 66px;height: 66px;} var utm_set = null;; /* The empty line above",
+  "Москва EUR (banki.ru): не JSON (13602 байт):  .gorizontal-vertikal {position: absolute;margin: auto;top: 0;right: 0;bottom: 0;left: 0;width: 66px;height: 66px;} var utm_set = null;; /* The empty line above"
  ]
 }
