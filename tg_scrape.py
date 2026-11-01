@@ -23,6 +23,12 @@ CUR = {
 # число 2–3 знака (с копейками), не часть большего числа: 81.5 да, 5000 и 80000 нет
 NUM_RE = re.compile(r"(?<![\d.,])(\d{2,3}(?:[.,]\d{1,2})?)(?![\d])")
 SIDE_RE = re.compile(r"(покупка|покупаю|куплю|скупаю|скупка|buy)|(продажа|продаю|продам|продаём|sell)", re.I)
+# признаки физической точки: офис, касса, пункт обмена, ТЦ/БЦ, адрес с домом, часы работы
+OFFICE_RE = re.compile(
+    r"(офис\w*|касс[аеуы]\w*|пункт\w*\s+обмена|обменн\w+\s+пункт\w*|точк[аеуи]\w*|"
+    r"\bтц\b|\bбц\b|торгов\w+\s+центр\w*|бизнес[\s-]центр\w*|"
+    r"\b(?:ул\.|улица|пр-т|проспект|пер\.|переулок|шоссе|наб\.|набережная|бульвар|б-р)\s*[А-ЯЁа-яё0-9\-\. ]{2,40}?,?\s*(?:д\.|дом)?\s*\d+|"
+    r"работаем\s+(?:с|ежедневно|без\s+выходных)|приезжайте|приходите)", re.I)
 METRO_RE = re.compile(r"(?:\bм\.|\bм\s|метро\s*)\s*([А-ЯЁ][а-яё]+(?:[\s\-][А-ЯЁа-яё][а-яё]+){0,2})")
 
 
@@ -81,10 +87,12 @@ async def collect():
             name = " ".join(x for x in (getattr(sender, "first_name", None), getattr(sender, "last_name", None)) if x) \
                 or getattr(sender, "title", None) or ""
             metro = METRO_RE.search(msg.message)
+            office = OFFICE_RE.search(msg.message)
             offers.append({
                 "uid": uid, "user": f"@{uname}" if uname else None, "name": name,
                 "time": msg.date.astimezone(MSK).strftime("%d.%m %H:%M"),
                 "metro": metro.group(1) if metro else None,
+                "office": re.sub(r"\s+", " ", office.group(0)).strip() if office else None,
                 "text": re.sub(r"\s+", " ", msg.message)[:280],
                 "link": f"https://t.me/{CHAT}/{msg.id}",
                 "rates": parsed,
@@ -107,10 +115,13 @@ def build(offers, days_by_user):
                 cur = best.get(o["uid"])
                 if cur is None or (v < cur[1] if side == "sell" else v > cur[1]):
                     best[o["uid"]] = (o, v)
-            items = sorted(best.values(), key=lambda t: t[1], reverse=(side == "buy"))[:TOP]
+            ranked = sorted(best.values(), key=lambda t: t[1], reverse=(side == "buy"))
+            with_office = [t for t in ranked if t[0]["office"]][:TOP]
+            items = sorted({id(t[0]): t for t in ranked[:TOP] + with_office}.values(),
+                           key=lambda t: t[1], reverse=(side == "buy"))
             block[side] = [{
                 "rate": v, "user": o["user"], "name": o["name"], "time": o["time"],
-                "metro": o["metro"], "link": o["link"], "text": o["text"],
+                "metro": o["metro"], "office": o["office"], "link": o["link"], "text": o["text"],
                 "days": len(days_by_user.get(o["uid"], ())),
             } for o, v in items]
         out[code] = block

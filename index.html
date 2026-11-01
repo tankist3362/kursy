@@ -50,6 +50,9 @@ button{font:inherit;font-size:16px;color:var(--accent);background:var(--panel);b
 .offer .txt{color:var(--muted);font-size:13px;margin-top:4px}
 .rep{display:inline-block;font-size:12px;border-radius:6px;padding:1px 6px;background:var(--soft);color:var(--ink)}
 .rep.low{background:var(--warnBg);color:var(--warn)}
+.rep.ok{background:var(--accent);color:var(--panel)}
+.filter{display:flex;gap:8px;align-items:center;font-size:15px;margin:4px 0 10px}
+.filter input{width:20px;height:20px;flex:none}
 .side-h{font-size:15px;color:var(--muted);padding:10px 14px 2px}
 </style></head><body>
 <div class="wrap">
@@ -114,7 +117,7 @@ function calc(){
   else{$("res").textContent=fmt(va)+" "+A;$("sub").textContent=fmt(vb)+" "+B+rateTxt}
   save();
 }
-function save(){try{localStorage.setItem("fx-calc3",JSON.stringify({rate:rate.value,n:n.value,rf:rf.value,rt:rt.value,flip,city}))}catch(e){}}
+function save(){try{localStorage.setItem("fx-calc3",JSON.stringify({rate:rate.value,n:n.value,rf:rf.value,rt:rt.value,flip,city,onlyOffice}))}catch(e){}}
 a.addEventListener("input",()=>{last="a";calc()});
 b.addEventListener("input",()=>{last="b";calc()});
 rate.addEventListener("input",calc);
@@ -124,7 +127,7 @@ $("sw").addEventListener("click",()=>{flip=!flip;[a.value,b.value]=[b.value,a.va
 /* ---------- курсы ---------- */
 const NAMES={USD:"Доллар",EUR:"Евро",RUB:"Российский рубль",BYN:"Белорусский рубль"};
 const SRC={minsk:"https://select.by/minsk/kurs",moscow:"https://ru.myfin.by/currency/{c}/moskva"};
-let DATA=null,city="minsk";
+let DATA=null,city="minsk",onlyOffice=true;
 
 function useRate(cur,per,quote,val,side){
   n.value=String(per);rf.value=cur;rt.value=quote;rate.value=fmt(val,6);
@@ -176,7 +179,7 @@ $("t-tg").addEventListener("click",()=>{city="tg";render();save()});
 
 function offerHtml(o,code,side,hist){
   const who=o.user?`<a href="https://t.me/${esc(o.user.slice(1))}" target="_blank" rel="noopener">${esc(o.user)}</a>`:esc(o.name||"без имени");
-  const rep=`<span class="rep${o.days<3?" low":""}">в чате ${o.days} из ${hist} дн.</span>`;
+  const rep=(o.office?`<span class="rep ok" title="${esc(o.office)}">есть точка</span> `:"")+`<span class="rep${o.days<3?" low":""}">в чате ${o.days} из ${hist} дн.</span>`;
   const bits=[o.time];if(o.metro)bits.push("м. "+esc(o.metro));
   return `<div class="offer"><div class="top"><span class="what"><span class="who">${who}</span> ${rep}<br><small>${bits.join(", ")}</small></span><span class="rate">${fmt(o.rate,2)}</span>
   <button type="button" class="use" data-c="${code}" data-per="1" data-q="RUB" data-v="${o.rate}" data-s="${side}">Подставить</button></div>
@@ -188,22 +191,26 @@ function renderTg(box){
   let h="";
   if(!d){h=`<div class="warn">${err.length?esc(err.join("; ")):"Чат обменников ещё не подключён."}</div>`;box.innerHTML=h;return}
   h+=`<div class="meta">Обновлено ${esc(d.updated)} (МСК), чат ${esc(d.source)}: за сутки ${d.offers} объявлений с курсом. От каждого автора — его лучшее объявление.</div>`;
+  h+=`<label class="filter"><input type="checkbox" id="only-office"${onlyOffice?" checked":""}> Только с точкой или кассой (офис, пункт обмена, адрес)</label>`;
   h+=`<div class="warn">Это частные объявления. «В чате N из ${d.history_days} дн.» — сколько дней автор публиковался за последнюю неделю: постоянные обменники пишут каждый день, новички — повод быть осторожнее. Проверяйте продавца и купюры на месте.</div>`;
   if(ageHours(d.updated)>3)h+=`<div class="warn">Объявления не обновлялись больше 3 часов.</div>`;
   if(err.length)h+=`<div class="warn">Последнее обновление с ошибкой: ${esc(err.join("; "))}</div>`;
   for(const code of ["USD","EUR"]){const r=(d.rates||{})[code];if(!r)continue;
-    const s=(r.sell||[]),b=(r.buy||[]);if(!s.length&&!b.length)continue;
+    const f=o=>!onlyOffice||o.office;
+    const s=(r.sell||[]).filter(f).slice(0,10),b=(r.buy||[]).filter(f).slice(0,10);
+    if(!s.length&&!b.length){h+=`<div class="cx"><h3>${NAMES[code]}</h3><div class="side-h">За сутки нет объявлений${onlyOffice?" с точкой — снимите галочку, чтобы увидеть все":""}.</div></div>`;continue}
     h+=`<div class="cx"><h3>${NAMES[code]}</h3>`;
     if(s.length)h+=`<div class="side-h">Купить ${code} — продают, дешевле сверху</div>`+s.map(o=>offerHtml(o,code,"sell",d.history_days)).join("");
     if(b.length)h+=`<div class="side-h">Продать ${code} — покупают, дороже сверху</div>`+b.map(o=>offerHtml(o,code,"buy",d.history_days)).join("");
     h+=`</div>`}
   box.innerHTML=h;
+  $("only-office").addEventListener("change",e=>{onlyOffice=e.target.checked;save();renderTg(box)});
   box.querySelectorAll("button.use").forEach(bt=>bt.addEventListener("click",()=>useRate(bt.dataset.c,+bt.dataset.per,bt.dataset.q,+bt.dataset.v,bt.dataset.s)));
 }
 
 const FALLBACK=null; /*FALLBACK*/
 (async()=>{
-  try{const d=JSON.parse(localStorage.getItem("fx-calc3")||"null");if(d){rate.value=d.rate||"";n.value=d.n||"100";rf.value=d.rf||"RUB";rt.value=d.rt||"BYN";flip=!!d.flip;city=d.city||"minsk"}}catch(e){}
+  try{const d=JSON.parse(localStorage.getItem("fx-calc3")||"null");if(d){rate.value=d.rate||"";n.value=d.n||"100";rf.value=d.rf||"RUB";rt.value=d.rt||"BYN";flip=!!d.flip;city=d.city||"minsk";if(d.onlyOffice===false)onlyOffice=false}}catch(e){}
   calc();
   try{const r=await fetch("rates.json?"+Date.now(),{cache:"no-store"});if(!r.ok)throw 0;DATA=await r.json()}
   catch(e){if(FALLBACK){DATA=FALLBACK;DATA._fallback=true}}
