@@ -1,7 +1,7 @@
 """
 Лучшие наличные курсы с адресами:
   Минск  — select.by  (USD, EUR, 100 RUB в BYN)
-  Москва — banki.ru   (USD, EUR в RUB)
+  Москва — ru.myfin.by (USD, EUR в RUB)
 Результат -> rates.json рядом со скриптом.
 """
 import json, re, datetime, urllib.request, urllib.parse, pathlib, html as htmllib
@@ -102,52 +102,58 @@ def minsk():
     return res, len(banks)
 
 
-# ---------------- Москва, banki.ru ----------------
-BANKI = "https://www.banki.ru"
-MOS_IDS = {"USD": 840, "EUR": 978}
+# ---------------- Москва, ru.myfin.by ----------------
+MYFIN = "https://ru.myfin.by"
+MOS_CODES = ("USD", "EUR")
 
 
 def moscow_currency(code):
-    referer = f"{BANKI}/products/currency/cash/{code.lower()}/moskva/"
-    offices, now = {}, datetime.datetime.now(MSK)
-    # разные сортировки -> в выдачу попадают отделения с лучшей покупкой и с лучшей продажей
-    for sort, order in (("buy", "desc"), ("sale", "asc"), ("recommend", "desc")):
-        q = urllib.parse.urlencode({
-            "sortAttribute": sort, "order": order, "currencyId": MOS_IDS[code], "currencyCode": code,
-            "regionUrl": "moskva", "regionId": 4, "isExchangeOffices": 0, "page": 1, "perPage": 100,
-            "pagePath": "currencyCashCodeCity", "isPagination": "true"})
-        raw = get(f"{BANKI}/products/currencyNodejsApi/getBanksWithOffices/?{q}", xhr=True, referer=referer)
-        try:
-            j = json.loads(raw)
-        except ValueError:
-            snippet = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", raw))[:160]
-            raise ValueError(f"не JSON ({len(raw)} байт): {snippet}")
-        for b in j.get("list", []):
-            for o in b.get("exchangeOffices") or []:
-                ex = o.get("exchange") or {}
-                date = ex.get("refreshDate")
-                if date:
-                    try:
-                        if (now - datetime.datetime.fromisoformat(date)).days > MAX_AGE_DAYS:
-                            continue
-                    except ValueError:
-                        pass
-                ci, co = o.get("contactInformation") or {}, o.get("coordinates") or {}
-                bal = (o.get("currencyBalanceStatus") or {}).get("status")
-                offices[o["id"]] = {
-                    "bank": b.get("name"),
-                    "branch": htmllib.unescape(o.get("name") or ""),
-                    "addr": (ci.get("address") or co.get("address") or "").replace("г Москва, ", ""),
-                    "metro": co.get("metroStation"),
-                    "lat": co.get("latitude"), "lon": co.get("longitude"),
-                    "phone": ci.get("phone"),
-                    "updated": date[:16].replace("T", " ") if date else None,
-                    "stock": bal,
-                    "buy": ex.get("buy"), "sell": ex.get("sale"),
-                }
-    places = list(offices.values())
+    """Все отделения банков Москвы со страницы Myfin (с пагинацией), лучший курс + адреса."""
+    places, today = [], datetime.datetime.now(MSK).date()
+    for page in range(1, 11):
+        url = f"{MYFIN}/currency/{code.lower()}/moskva" + (f"?page={page}" if page > 1 else "")
+        soup = BeautifulSoup(get(url), "html.parser")
+        table = soup.select_one("table.with_department")
+        if not table:
+            if page == 1:
+                raise ValueError("не найдена таблица банков")
+            break
+        banks = {}
+        for tr in table.select("tr[data-bank-alias]"):
+            name = tr.select_one("td.bank_name")
+            banks[tr.get("data-key")] = (name.get_text(" ", strip=True) if name else tr["data-bank-alias"], tr["data-bank-alias"])
+        for tr in table.select("tr.hidden-info-block"):
+            if "more_header" in tr.get("class", []):
+                continue
+            key = next((c[2:] for c in tr.get("class", []) if re.fullmatch(r"tr\d+", c)), None)
+            a = tr.find("a")
+            vals = [num(td.get_text()) for td in tr.select("td.center")]
+            if key not in banks or not a or len(vals) < 2:
+                continue
+            t = tr.find("time")
+            when = None
+            if t and t.get("datetime"):
+                try:
+                    d = datetime.date.fromisoformat(t["datetime"][:10])
+                    if (today - d).days > MAX_AGE_DAYS:
+                        continue
+                except ValueError:
+                    pass
+                when = t.get_text(strip=True)
+            qs = urllib.parse.parse_qs(urllib.parse.urlparse(a.get("href", "")).query)
+            bank, alias = banks[key]
+            places.append({
+                "bank": bank,
+                "branch": (qs.get("search_string") or [""])[0].replace("\xa0", " "),
+                "addr": re.sub(r"^Москва,\s*", "", a.get_text(" ", strip=True)),
+                "updated": when,
+                "link": MYFIN + a["href"] if a.get("href", "").startswith("/") else None,
+                "buy": vals[0], "sell": vals[1],
+            })
+        if not soup.select_one(f'.pagination a[href*="page={page + 1}"]'):
+            break
     if not places:
-        raise ValueError("нет отделений")
+        raise ValueError("нет отделений с актуальным курсом")
     return {"per": 1, "quote": "RUB",
             "buy": best(places, "buy", True),
             "sell": best(places, "sell", False)}
@@ -164,15 +170,15 @@ def main():
     except Exception as e:
         data["errors"].append(f"Минск (select.by): {e}")
 
-    mos_rates, ok = {k: v for k, v in (data["moscow"] or {}).get("rates", {}).items() if k in MOS_IDS}, False
-    for code in MOS_IDS:
+    mos_rates, ok = {k: v for k, v in (data["moscow"] or {}).get("rates", {}).items() if k in MOS_CODES}, False
+    for code in MOS_CODES:
         try:
             mos_rates[code] = moscow_currency(code)
             ok = True
         except Exception as e:
-            data["errors"].append(f"Москва {code} (banki.ru): {e}")
+            data["errors"].append(f"Москва {code} (myfin): {e}")
     if ok:
-        data["moscow"] = {"updated": now, "source": "banki.ru", "rates": mos_rates}
+        data["moscow"] = {"updated": now, "source": "ru.myfin.by", "rates": mos_rates}
 
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1), "utf-8")
     print(json.dumps(data, ensure_ascii=False, indent=1)[:3000])

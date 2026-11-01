@@ -115,7 +115,7 @@ $("sw").addEventListener("click",()=>{flip=!flip;[a.value,b.value]=[b.value,a.va
 
 /* ---------- курсы ---------- */
 const NAMES={USD:"Доллар",EUR:"Евро",RUB:"Российский рубль",BYN:"Белорусский рубль"};
-const SRC={minsk:"https://select.by/minsk/kurs",moscow:"https://www.banki.ru/products/currency/cash/{c}/moskva/"};
+const SRC={minsk:"https://select.by/minsk/kurs",moscow:"https://ru.myfin.by/currency/{c}/moskva"};
 let DATA=null,city="minsk";
 
 function useRate(cur,per,quote,val,side){
@@ -131,9 +131,9 @@ function placeHtml(p,c){
   const bits=[];
   if(p.metro)bits.push("м. "+esc(p.metro));
   if(p.phone)bits.push(esc(p.phone));
-  if(p.updated)bits.push("курс от "+esc(p.updated.slice(8,10)+"."+p.updated.slice(5,7)+" "+p.updated.slice(11)));
+  if(p.updated){const m=/^(\d{4})-(\d\d)-(\d\d) (.*)$/.exec(p.updated);bits.push("курс от "+esc(m?m[3]+"."+m[2]+" "+m[4]:p.updated))}
   if(p.stock)bits.push(esc(p.stock));
-  return `<div class="place"><b>${esc(p.bank)}</b>${p.branch?`, <span class="s">${esc(p.branch)}</span>`:""}<br>${esc(p.addr)} <a href="${map}" target="_blank" rel="noopener">на карте</a>${bits.length?`<br><span class="s">${bits.join(", ")}</span>`:""}</div>`;
+  return `<div class="place"><b>${esc(p.bank)}</b>${p.branch?`, <span class="s">${esc(p.branch)}</span>`:""}<br>${esc(p.addr)} <a href="${map}" target="_blank" rel="noopener">на карте</a>${bits.length?`<br><span class="s">${bits.join(", ")}</span>`:""}${p.link?` <a href="${esc(p.link)}" target="_blank" rel="noopener">об отделении</a>`:""}</div>`;
 }
 function sideHtml(c,code,r,side){
   const s=r[side];if(!s)return "";
@@ -151,7 +151,7 @@ function render(){
   if(!DATA){box.innerHTML='<div class="warn">Курсы не загрузились. Калькулятор работает, курс можно ввести вручную.</div>';return}
   const d=DATA[city]||{};const R=d.rates||{};
   const order=city==="minsk"?["RUB","USD","EUR"]:["USD","EUR"];
-  let h=`<div class="meta">Обновлено ${esc(d.updated||"—")} (МСК), источник ${esc(d.source||"")}. ${city==="minsk"?"Курсы в BYN, только отделения банков.":"Курсы в RUB, обменные пункты банков."}</div>`;
+  let h=`<div class="meta">Обновлено ${esc(d.updated||"—")} (МСК), источник ${esc(d.source||"")}. ${city==="minsk"?"Курсы в BYN, только отделения банков.":"Курсы в RUB, отделения банков Москвы."}</div>`;
   if(DATA._fallback)h+=`<div class="warn">Свежие курсы не загрузились — показан сохранённый снимок.</div>`;
   else if(ageHours(d.updated)>3)h+=`<div class="warn">Курсы не обновлялись больше 3 часов — перед поездкой проверьте на сайте.</div>`;
   const err=(DATA.errors||[]).filter(e=>e.startsWith(city==="minsk"?"Минск":"Москва"));
