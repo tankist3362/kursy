@@ -179,11 +179,15 @@ $("t-tg").addEventListener("click",()=>{city="tg";render();save()});
 
 function offerHtml(o,code,side,hist){
   const who=o.user?`<a href="https://t.me/${esc(o.user.slice(1))}" target="_blank" rel="noopener">${esc(o.user)}</a>`:esc(o.name||"без имени");
-  const rep=(o.office?`<span class="rep ok" title="${esc(o.office)}">есть точка</span> `:"")+`<span class="rep${o.days<3?" low":""}">в чате ${o.days} из ${hist} дн.</span>`;
+  const rep=(o.verified?`<span class="rep ok" title="метка администрации чата">${esc(o.tag||"обмен проверен")}</span> `:"")
+    +(o.office?`<span class="rep ok" title="${esc(o.office)}">есть точка</span> `:"")
+    +`<span class="rep${o.days<3&&!o.verified?" low":""}">в чате ${o.days} из ${hist} дн.</span>`;
   const bits=[o.time];if(o.metro)bits.push("м. "+esc(o.metro));
-  return `<div class="offer"><div class="top"><span class="what"><span class="who">${who}</span> ${rep}<br><small>${bits.join(", ")}</small></span><span class="rate">${fmt(o.rate,2)}</span>
+  const label=o.variant?` <small>(${esc(o.variant)})</small>`:"";
+  const rows=(o.rows||[]).length>1?`<div class="txt">${o.rows.map(r=>`${code}${r.variant?" "+esc(r.variant):""}: покупают ${fmt(r.buy,2)} / продают ${fmt(r.sell,2)}`).join("<br>")}</div>`:"";
+  return `<div class="offer"><div class="top"><span class="what"><span class="who">${who}</span>${label}<br>${rep}<br><small>${bits.join(", ")}</small></span><span class="rate">${fmt(o.rate,2)}</span>
   <button type="button" class="use" data-c="${code}" data-per="1" data-q="RUB" data-v="${o.rate}" data-s="${side}">Подставить</button></div>
-  <div class="txt">${esc(o.text)} <a href="${esc(o.link)}" target="_blank" rel="noopener">сообщение</a></div></div>`;
+  ${rows}<div class="txt">${(o.rows||[]).length?"":esc(o.text)+" "}<a href="${esc(o.link)}" target="_blank" rel="noopener">открыть сообщение</a></div></div>`;
 }
 function renderTg(box){
   const d=DATA.moscow_tg;
@@ -191,12 +195,12 @@ function renderTg(box){
   let h="";
   if(!d){h=`<div class="warn">${err.length?esc(err.join("; ")):"Чат обменников ещё не подключён."}</div>`;box.innerHTML=h;return}
   h+=`<div class="meta">Обновлено ${esc(d.updated)} (МСК), чат ${esc(d.source)}: за сутки ${d.offers} объявлений с курсом. От каждого автора — его лучшее объявление.</div>`;
-  h+=`<label class="filter"><input type="checkbox" id="only-office"${onlyOffice?" checked":""}> Только с точкой или кассой (офис, пункт обмена, адрес)</label>`;
-  h+=`<div class="warn">Это частные объявления. «В чате N из ${d.history_days} дн.» — сколько дней автор публиковался за последнюю неделю: постоянные обменники пишут каждый день, новички — повод быть осторожнее. Проверяйте продавца и купюры на месте.</div>`;
+  h+=`<label class="filter"><input type="checkbox" id="only-office"${onlyOffice?" checked":""}> Только проверенные чатом или с точкой (офис, касса, адрес)</label>`;
+  h+=`<div class="warn">Это частные объявления. Метку «обмен проверен» ставит администрация чата. «В чате N из ${d.history_days} дн.» — сколько дней автор публиковался за неделю (считается с момента подключения). Проверяйте продавца и купюры на месте.</div>`;
   if(ageHours(d.updated)>3)h+=`<div class="warn">Объявления не обновлялись больше 3 часов.</div>`;
   if(err.length)h+=`<div class="warn">Последнее обновление с ошибкой: ${esc(err.join("; "))}</div>`;
   for(const code of ["USD","EUR"]){const r=(d.rates||{})[code];if(!r)continue;
-    const f=o=>!onlyOffice||o.office;
+    const f=o=>!onlyOffice||o.office||o.verified;
     const s=(r.sell||[]).filter(f).slice(0,10),b=(r.buy||[]).filter(f).slice(0,10);
     if(!s.length&&!b.length){h+=`<div class="cx"><h3>${NAMES[code]}</h3><div class="side-h">За сутки нет объявлений${onlyOffice?" с точкой — снимите галочку, чтобы увидеть все":""}.</div></div>`;continue}
     h+=`<div class="cx"><h3>${NAMES[code]}</h3>`;

@@ -16,14 +16,24 @@ jobs:
       - run: python scrape.py
       - name: Telegram-чат обменников
         env:
+          TG_WEB_STORAGE: ${{ secrets.TG_WEB_STORAGE }}
           TG_API_ID: ${{ secrets.TG_API_ID }}
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
           TG_SESSION: ${{ secrets.TG_SESSION }}
-        run: python tg_scrape.py
+        run: |
+          if [ -n "$TG_SESSION" ]; then python tg_scrape.py
+          elif [ -n "$TG_WEB_STORAGE" ]; then
+            pip install -q playwright && python -m playwright install --with-deps chromium >/dev/null
+            python tg_web.py
+          else echo "Telegram не подключён"; fi
+      - name: Скриншот веб-Telegram (для отладки)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: tg-debug, path: tg_debug.png, if-no-files-found: ignore, retention-days: 3 }
       - name: Сохранить rates.json
         run: |
           git config user.name "kurs-bot"
           git config user.email "kurs-bot@users.noreply.github.com"
-          git add rates.json
+          git add rates.json tg_seen.json 2>/dev/null || git add rates.json
           git diff --cached --quiet || git commit -m "Курсы $(TZ=Europe/Moscow date +'%d.%m %H:%M')"
           git push
