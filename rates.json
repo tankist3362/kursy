@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-02 16:05",
+  "updated": "2026-11-02 17:03",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -8,22 +8,13 @@
     "per": 1,
     "quote": "BYN",
     "buy": {
-     "rate": 2.953,
-     "count": 25,
+     "rate": 2.955,
+     "count": 17,
      "banks": [
       "БНБ-Банк",
-      "БСБ Банк",
       "Статусбанк"
      ],
      "places": [
-      {
-       "bank": "БСБ Банк",
-       "branch": "Касса №177",
-       "addr": "просп. Независимости, 154",
-       "lat": 53.9364,
-       "lon": 27.6732,
-       "phone": "+375(17)306-20-40"
-      },
       {
        "bank": "БНБ-Банк",
        "branch": "Точка обслуживания на Независимости",
@@ -39,16 +30,22 @@
        "lat": 53.8598,
        "lon": 27.6738,
        "phone": null
+      },
+      {
+       "bank": "БНБ-Банк",
+       "branch": "УРМ Титан",
+       "addr": "просп. Дзержинского, 104",
+       "lat": 53.8617,
+       "lon": 27.4802,
+       "phone": "+375(17)309-73-09"
       }
      ]
     },
     "sell": {
      "rate": 2.955,
-     "count": 8,
+     "count": 3,
      "banks": [
-      "БНБ-Банк",
-      "БСБ Банк",
-      "Статусбанк"
+      "БСБ Банк"
      ],
      "places": [
       {
@@ -60,20 +57,20 @@
        "phone": "+375(17)306-20-40"
       },
       {
-       "bank": "БНБ-Банк",
-       "branch": "ПОВ №8 РМ №8/2",
-       "addr": "ул. Налибокская, 36",
-       "lat": 53.9279,
-       "lon": 27.4328,
-       "phone": "+375(17)309-73-09"
+       "bank": "БСБ Банк",
+       "branch": "Отделение №9",
+       "addr": "ул. Я. Купалы, 25",
+       "lat": 53.9054,
+       "lon": 27.5616,
+       "phone": "+375(17)306-20-40"
       },
       {
-       "bank": "Статусбанк",
-       "branch": "Обменный пункт №15",
-       "addr": "просп. Независимости, 154",
-       "lat": 53.9362,
-       "lon": 27.6733,
-       "phone": null
+       "bank": "БСБ Банк",
+       "branch": "Головной офис",
+       "addr": "просп. Победителей, 23/4",
+       "lat": 53.9111,
+       "lon": 27.5405,
+       "phone": "+375(17)306-20-40"
       }
      ]
     }
@@ -117,12 +114,21 @@
      ]
     },
     "sell": {
-     "rate": 3.308,
-     "count": 1,
+     "rate": 3.309,
+     "count": 4,
      "banks": [
+      "БСБ Банк",
       "Статусбанк"
      ],
      "places": [
+      {
+       "bank": "БСБ Банк",
+       "branch": "ПОВ №151",
+       "addr": "просп. Победителей, 23/4",
+       "lat": 53.911,
+       "lon": 27.5406,
+       "phone": "+375(17)306-20-40"
+      },
       {
        "bank": "Статусбанк",
        "branch": "Обменный пункт №11",
@@ -130,6 +136,14 @@
        "lat": 53.9642,
        "lon": 27.5359,
        "phone": null
+      },
+      {
+       "bank": "БСБ Банк",
+       "branch": "Отделение №10",
+       "addr": "Логойский тракт, 15/4",
+       "lat": 53.9443,
+       "lon": 27.6098,
+       "phone": "+375(17)306-20-40"
       }
      ]
     }
@@ -139,9 +153,8 @@
     "quote": "BYN",
     "buy": {
      "rate": 3.475,
-     "count": 15,
+     "count": 12,
      "banks": [
-      "Нео Банк",
       "Статусбанк"
      ],
      "places": [
@@ -154,19 +167,19 @@
        "phone": null
       },
       {
-       "bank": "Нео Банк",
-       "branch": "Головной офис",
-       "addr": "ул. В. Хоружей, 20-2",
-       "lat": 53.9219,
-       "lon": 27.5671,
-       "phone": "+375(17)334-54-34"
-      },
-      {
        "bank": "Статусбанк",
        "branch": "Обменный пункт №17",
        "addr": "просп. Партизанский, 85",
        "lat": 53.8702,
        "lon": 27.6318,
+       "phone": null
+      },
+      {
+       "bank": "Статусбанк",
+       "branch": "Кассовый центр «Казимировский»",
+       "addr": "ул. Казимировская, 6",
+       "lat": 53.9174,
+       "lon": 27.4296,
        "phone": null
       }
      ]
@@ -209,7 +222,7 @@
   }
  },
  "moscow": {
-  "updated": "2026-11-02 16:05",
+  "updated": "2026-11-02 17:03",
   "source": "ru.myfin.by",
   "rates": {
    "USD": {
@@ -217,9 +230,10 @@
     "quote": "RUB",
     "buy": {
      "rate": 82.6,
-     "count": 1,
+     "count": 2,
      "banks": [
-      "Живаго банк"
+      "Живаго банк",
+      "Трансстройбанк"
      ],
      "places": [
       {
@@ -228,11 +242,18 @@
        "addr": "вн.тер.г. муниципальный округ Пресненский, наб. Пресненская, д. 12, пом. 17В/П",
        "updated": "02.11.2026 12:00",
        "link": "https://ru.myfin.by/bank/zhivago-bank/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%D0%94%D0%B5%D0%BB%D0%BE%D0%B2%D0%BE%D0%B9+%D1%86%D0%B5%D0%BD%D1%82%D1%80"
+      },
+      {
+       "bank": "Трансстройбанк",
+       "branch": "ДО «Парковый»",
+       "addr": "9-я Парковая улица, 30",
+       "updated": "02.11.2026 13:30",
+       "link": "https://ru.myfin.by/bank/transstroybank/departments-list/moskva?mode=map&search_string=%D0%94%D0%9E+%C2%AB%D0%9F%D0%B0%D1%80%D0%BA%D0%BE%D0%B2%D1%8B%D0%B9%C2%BB"
       }
      ]
     },
     "sell": {
-     "rate": 80.76,
+     "rate": 80.73,
      "count": 1,
      "banks": [
       "КАМКОМБАНК"
@@ -242,7 +263,7 @@
        "bank": "КАМКОМБАНК",
        "branch": "Дополнительный офис «Бакунинская»",
        "addr": "улица Бакунинская, 50,стр.1,",
-       "updated": "02.11.2026 12:45",
+       "updated": "02.11.2026 14:00",
        "link": "https://ru.myfin.by/bank/kamkombank/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%91%D0%B0%D0%BA%D1%83%D0%BD%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%C2%BB"
       }
      ]
@@ -252,7 +273,7 @@
     "per": 1,
     "quote": "RUB",
     "buy": {
-     "rate": 92.9,
+     "rate": 93.05,
      "count": 567,
      "banks": [
       "Банк ВТБ"
@@ -262,43 +283,495 @@
        "bank": "Банк ВТБ",
        "branch": "Дополнительный офис «Юго-Западный»",
        "addr": "проспект Вернадского, 105к3",
-       "updated": "02.11.2026 11:45",
+       "updated": "02.11.2026 13:45",
        "link": "https://ru.myfin.by/bank/vtb/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%AE%D0%B3%D0%BE-%D0%97%D0%B0%D0%BF%D0%B0%D0%B4%D0%BD%D1%8B%D0%B9%C2%BB"
       },
       {
        "bank": "Банк ВТБ",
        "branch": "Дополнительный офис «Южнобутовский»",
        "addr": "69, Москва, 117042",
-       "updated": "02.11.2026 11:45",
+       "updated": "02.11.2026 13:45",
        "link": "https://ru.myfin.by/bank/vtb/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%AE%D0%B6%D0%BD%D0%BE%D0%B1%D1%83%D1%82%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%C2%BB"
       },
       {
        "bank": "Банк ВТБ",
        "branch": "Дополнительный офис «Южный»",
        "addr": "Кировоградская улица, 14",
-       "updated": "02.11.2026 11:45",
+       "updated": "02.11.2026 13:45",
        "link": "https://ru.myfin.by/bank/vtb/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%AE%D0%B6%D0%BD%D1%8B%D0%B9%C2%BB"
       }
      ]
     },
     "sell": {
-     "rate": 92.5,
-     "count": 1,
+     "rate": 92.6,
+     "count": 5,
      "banks": [
-      "Солид Банк"
+      "Акибанк",
+      "Норвик Банк (Вятка Банк)"
      ],
      "places": [
       {
-       "bank": "Солид Банк",
-       "branch": "Московский филиал",
-       "addr": "Хорошёвское шоссе, 32А",
-       "updated": "02.11.2026 08:15",
-       "link": "https://ru.myfin.by/bank/solid-bank/departments-list/moskva?mode=map&search_string=%D0%9C%D0%BE%D1%81%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB"
+       "bank": "Акибанк",
+       "branch": "Дополнительный офис № 7",
+       "addr": "Большая Переяславская улица, 46с2",
+       "updated": "31.10.2026 21:15",
+       "link": "https://ru.myfin.by/bank/akibank/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%E2%84%96%C2%A07"
+      },
+      {
+       "bank": "Норвик Банк (Вятка Банк)",
+       "branch": "Дополнительный офис «Зацепский»",
+       "addr": "улица Зацепский Вал, 5",
+       "updated": "02.11.2026 11:30",
+       "link": "https://ru.myfin.by/bank/norvik/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%97%D0%B0%D1%86%D0%B5%D0%BF%D1%81%D0%BA%D0%B8%D0%B9%C2%BB"
+      },
+      {
+       "bank": "Норвик Банк (Вятка Банк)",
+       "branch": "Дополнительный офис «Новинский»",
+       "addr": "Новинский бульвар, 20Ас8",
+       "updated": "02.11.2026 11:30",
+       "link": "https://ru.myfin.by/bank/norvik/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%9D%D0%BE%D0%B2%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%C2%BB"
       }
      ]
     }
    }
   }
  },
- "errors": []
+ "errors": [],
+ "moscow_tg": {
+  "updated": "2026-11-02 17:04",
+  "source": "t.me/obmenvmsk",
+  "scanned": 199,
+  "offers": 123,
+  "history_days": 7,
+  "rates": {
+   "USD": {
+    "sell": [
+     {
+      "rate": 84.2,
+      "variant": "синий",
+      "rows": [
+       {
+        "variant": "синий",
+        "buy": 83.7,
+        "sell": 84.2
+       },
+       {
+        "variant": "белый",
+        "buy": 83.2,
+        "sell": 83.9
+       }
+      ],
+      "user": null,
+      "name": "Михаил Кутузов",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:42",
+      "metro": "Кутузовская",
+      "office": "парковка",
+      "link": "https://t.me/obmenvmsk/1328500",
+      "text": "⚡ ️ КУРСЫ ОБНОВЛЕНЫ Покупаем | Продаём USD синий - 83,70 | 84,20 USD белый - 83,20 | 83,90 EUR - 93,80 | 94,70 EUR 500 - 93,10 | 94,20 Москва, м. Кутузовская Проверка купюр Удобная парковка Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% Написать менеджеру",
+      "days": 2
+     },
+     {
+      "rate": 84.2,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 83.7,
+        "sell": 84.2
+       },
+       {
+        "variant": "",
+        "buy": 83.2,
+        "sell": 83.9
+       }
+      ],
+      "user": null,
+      "name": "ФинТех Обмен",
+      "verified": true,
+      "tag": "обмен проверен",
+      "time": "02.11 16:45",
+      "metro": null,
+      "office": "КАССЫ",
+      "link": "https://t.me/obmenvmsk/1328501",
+      "text": "ВАЛЮТА ПОКУПКА ПРОДАЖА USD 83.70 84.20 USD 83.20 83.90 EUR 93.80 94.70 EUR 500 93.10 94.20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% КАССЫ ПО ВСЕЙ МОСКВЕ ОБМЕН ВЕТХИХ ДОЛЛАРОВ 📲 Зафиксировать курс",
+      "days": 2
+     },
+     {
+      "rate": 84.2,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 83.7,
+        "sell": 84.2
+       },
+       {
+        "variant": "",
+        "buy": 83.2,
+        "sell": 83.9
+       }
+      ],
+      "user": null,
+      "name": "ВКурсе",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:36",
+      "metro": "Университет",
+      "office": "Работаем с",
+      "link": "https://t.me/obmenvmsk/1328497",
+      "text": "АКТУАЛЬНЫЕ КУРСЫ ВАЛЮТА ПОКУПКА ПРОДАЖА USD 83,70 84,20 USD 83,20 83,90 EUR 93,80 94,70 EUR 500 93,10 94,20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% МСК, м. Университет Работаем с 09:00 - 22:30 Уточнить курс",
+      "days": 2
+     },
+     {
+      "rate": 84.2,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 83.7,
+        "sell": 84.2
+       },
+       {
+        "variant": "",
+        "buy": 83.2,
+        "sell": 83.9
+       }
+      ],
+      "user": null,
+      "name": "Финансист",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:39",
+      "metro": "Белорусская",
+      "office": "График: 0",
+      "link": "https://t.me/obmenvmsk/1328498",
+      "text": "ФИНАНСИСТ ПОКУПКА / ПРОДАЖА USD: 83,70 / 84,20 USD: 83,20 / 83,90 EUR (по 200): 93,80 / 94,70 EUR (по 500): 93,10 / 94,20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% Метро Белорусская График: 09:00 - 22:30 Связь с менеджером",
+      "days": 2
+     }
+    ],
+    "buy": [
+     {
+      "rate": 83.7,
+      "variant": "синий",
+      "rows": [
+       {
+        "variant": "синий",
+        "buy": 83.7,
+        "sell": 84.2
+       },
+       {
+        "variant": "белый",
+        "buy": 83.2,
+        "sell": 83.9
+       }
+      ],
+      "user": null,
+      "name": "Михаил Кутузов",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:42",
+      "metro": "Кутузовская",
+      "office": "парковка",
+      "link": "https://t.me/obmenvmsk/1328500",
+      "text": "⚡ ️ КУРСЫ ОБНОВЛЕНЫ Покупаем | Продаём USD синий - 83,70 | 84,20 USD белый - 83,20 | 83,90 EUR - 93,80 | 94,70 EUR 500 - 93,10 | 94,20 Москва, м. Кутузовская Проверка купюр Удобная парковка Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% Написать менеджеру",
+      "days": 2
+     },
+     {
+      "rate": 83.7,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 83.7,
+        "sell": 84.2
+       },
+       {
+        "variant": "",
+        "buy": 83.2,
+        "sell": 83.9
+       }
+      ],
+      "user": null,
+      "name": "ФинТех Обмен",
+      "verified": true,
+      "tag": "обмен проверен",
+      "time": "02.11 16:45",
+      "metro": null,
+      "office": "КАССЫ",
+      "link": "https://t.me/obmenvmsk/1328501",
+      "text": "ВАЛЮТА ПОКУПКА ПРОДАЖА USD 83.70 84.20 USD 83.20 83.90 EUR 93.80 94.70 EUR 500 93.10 94.20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% КАССЫ ПО ВСЕЙ МОСКВЕ ОБМЕН ВЕТХИХ ДОЛЛАРОВ 📲 Зафиксировать курс",
+      "days": 2
+     },
+     {
+      "rate": 83.7,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 83.7,
+        "sell": 84.2
+       },
+       {
+        "variant": "",
+        "buy": 83.2,
+        "sell": 83.9
+       }
+      ],
+      "user": null,
+      "name": "ВКурсе",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:36",
+      "metro": "Университет",
+      "office": "Работаем с",
+      "link": "https://t.me/obmenvmsk/1328497",
+      "text": "АКТУАЛЬНЫЕ КУРСЫ ВАЛЮТА ПОКУПКА ПРОДАЖА USD 83,70 84,20 USD 83,20 83,90 EUR 93,80 94,70 EUR 500 93,10 94,20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% МСК, м. Университет Работаем с 09:00 - 22:30 Уточнить курс",
+      "days": 2
+     },
+     {
+      "rate": 83.7,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 83.7,
+        "sell": 84.2
+       },
+       {
+        "variant": "",
+        "buy": 83.2,
+        "sell": 83.9
+       }
+      ],
+      "user": null,
+      "name": "Финансист",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:39",
+      "metro": "Белорусская",
+      "office": "График: 0",
+      "link": "https://t.me/obmenvmsk/1328498",
+      "text": "ФИНАНСИСТ ПОКУПКА / ПРОДАЖА USD: 83,70 / 84,20 USD: 83,20 / 83,90 EUR (по 200): 93,80 / 94,70 EUR (по 500): 93,10 / 94,20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% Метро Белорусская График: 09:00 - 22:30 Связь с менеджером",
+      "days": 2
+     }
+    ]
+   },
+   "EUR": {
+    "sell": [
+     {
+      "rate": 94.7,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 93.8,
+        "sell": 94.7
+       },
+       {
+        "variant": "500",
+        "buy": 93.1,
+        "sell": 94.2
+       }
+      ],
+      "user": null,
+      "name": "Михаил Кутузов",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:42",
+      "metro": "Кутузовская",
+      "office": "парковка",
+      "link": "https://t.me/obmenvmsk/1328500",
+      "text": "⚡ ️ КУРСЫ ОБНОВЛЕНЫ Покупаем | Продаём USD синий - 83,70 | 84,20 USD белый - 83,20 | 83,90 EUR - 93,80 | 94,70 EUR 500 - 93,10 | 94,20 Москва, м. Кутузовская Проверка купюр Удобная парковка Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% Написать менеджеру",
+      "days": 2
+     },
+     {
+      "rate": 94.7,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 93.8,
+        "sell": 94.7
+       },
+       {
+        "variant": "500",
+        "buy": 93.1,
+        "sell": 94.2
+       }
+      ],
+      "user": null,
+      "name": "ФинТех Обмен",
+      "verified": true,
+      "tag": "обмен проверен",
+      "time": "02.11 16:45",
+      "metro": null,
+      "office": "КАССЫ",
+      "link": "https://t.me/obmenvmsk/1328501",
+      "text": "ВАЛЮТА ПОКУПКА ПРОДАЖА USD 83.70 84.20 USD 83.20 83.90 EUR 93.80 94.70 EUR 500 93.10 94.20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% КАССЫ ПО ВСЕЙ МОСКВЕ ОБМЕН ВЕТХИХ ДОЛЛАРОВ 📲 Зафиксировать курс",
+      "days": 2
+     },
+     {
+      "rate": 94.7,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 93.8,
+        "sell": 94.7
+       },
+       {
+        "variant": "500",
+        "buy": 93.1,
+        "sell": 94.2
+       }
+      ],
+      "user": null,
+      "name": "ВКурсе",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:36",
+      "metro": "Университет",
+      "office": "Работаем с",
+      "link": "https://t.me/obmenvmsk/1328497",
+      "text": "АКТУАЛЬНЫЕ КУРСЫ ВАЛЮТА ПОКУПКА ПРОДАЖА USD 83,70 84,20 USD 83,20 83,90 EUR 93,80 94,70 EUR 500 93,10 94,20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% МСК, м. Университет Работаем с 09:00 - 22:30 Уточнить курс",
+      "days": 2
+     },
+     {
+      "rate": 94.7,
+      "variant": "по 200",
+      "rows": [
+       {
+        "variant": "по 200",
+        "buy": 93.8,
+        "sell": 94.7
+       },
+       {
+        "variant": "по 500",
+        "buy": 93.1,
+        "sell": 94.2
+       }
+      ],
+      "user": null,
+      "name": "Финансист",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:39",
+      "metro": "Белорусская",
+      "office": "График: 0",
+      "link": "https://t.me/obmenvmsk/1328498",
+      "text": "ФИНАНСИСТ ПОКУПКА / ПРОДАЖА USD: 83,70 / 84,20 USD: 83,20 / 83,90 EUR (по 200): 93,80 / 94,70 EUR (по 500): 93,10 / 94,20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% Метро Белорусская График: 09:00 - 22:30 Связь с менеджером",
+      "days": 2
+     }
+    ],
+    "buy": [
+     {
+      "rate": 93.8,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 93.8,
+        "sell": 94.7
+       },
+       {
+        "variant": "500",
+        "buy": 93.1,
+        "sell": 94.2
+       }
+      ],
+      "user": null,
+      "name": "Михаил Кутузов",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:42",
+      "metro": "Кутузовская",
+      "office": "парковка",
+      "link": "https://t.me/obmenvmsk/1328500",
+      "text": "⚡ ️ КУРСЫ ОБНОВЛЕНЫ Покупаем | Продаём USD синий - 83,70 | 84,20 USD белый - 83,20 | 83,90 EUR - 93,80 | 94,70 EUR 500 - 93,10 | 94,20 Москва, м. Кутузовская Проверка купюр Удобная парковка Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% Написать менеджеру",
+      "days": 2
+     },
+     {
+      "rate": 93.8,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 93.8,
+        "sell": 94.7
+       },
+       {
+        "variant": "500",
+        "buy": 93.1,
+        "sell": 94.2
+       }
+      ],
+      "user": null,
+      "name": "ФинТех Обмен",
+      "verified": true,
+      "tag": "обмен проверен",
+      "time": "02.11 16:45",
+      "metro": null,
+      "office": "КАССЫ",
+      "link": "https://t.me/obmenvmsk/1328501",
+      "text": "ВАЛЮТА ПОКУПКА ПРОДАЖА USD 83.70 84.20 USD 83.20 83.90 EUR 93.80 94.70 EUR 500 93.10 94.20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% КАССЫ ПО ВСЕЙ МОСКВЕ ОБМЕН ВЕТХИХ ДОЛЛАРОВ 📲 Зафиксировать курс",
+      "days": 2
+     },
+     {
+      "rate": 93.8,
+      "variant": "",
+      "rows": [
+       {
+        "variant": "",
+        "buy": 93.8,
+        "sell": 94.7
+       },
+       {
+        "variant": "500",
+        "buy": 93.1,
+        "sell": 94.2
+       }
+      ],
+      "user": null,
+      "name": "ВКурсе",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:36",
+      "metro": "Университет",
+      "office": "Работаем с",
+      "link": "https://t.me/obmenvmsk/1328497",
+      "text": "АКТУАЛЬНЫЕ КУРСЫ ВАЛЮТА ПОКУПКА ПРОДАЖА USD 83,70 84,20 USD 83,20 83,90 EUR 93,80 94,70 EUR 500 93,10 94,20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% МСК, м. Университет Работаем с 09:00 - 22:30 Уточнить курс",
+      "days": 2
+     },
+     {
+      "rate": 93.8,
+      "variant": "по 200",
+      "rows": [
+       {
+        "variant": "по 200",
+        "buy": 93.8,
+        "sell": 94.7
+       },
+       {
+        "variant": "по 500",
+        "buy": 93.1,
+        "sell": 94.2
+       }
+      ],
+      "user": null,
+      "name": "Финансист",
+      "verified": true,
+      "tag": "Обмен проверен",
+      "time": "02.11 16:39",
+      "metro": "Белорусская",
+      "office": "График: 0",
+      "link": "https://t.me/obmenvmsk/1328498",
+      "text": "ФИНАНСИСТ ПОКУПКА / ПРОДАЖА USD: 83,70 / 84,20 USD: 83,20 / 83,90 EUR (по 200): 93,80 / 94,70 EUR (по 500): 93,10 / 94,20 Условия обмена USDT / USD 💱 USDT → USD · +0,9% 💱 USD → USDT · -1,7% Метро Белорусская График: 09:00 - 22:30 Связь с менеджером",
+      "days": 2
+     }
+    ]
+   }
+  }
+ }
 }
