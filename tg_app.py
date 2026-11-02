@@ -5,7 +5,7 @@ python tg_app.py -> номер телефона -> код, который при
 Коды ниоткуда не отправляются, кроме самого my.telegram.org.
 """
 import re, sys, html
-import urllib.request, urllib.parse, http.cookiejar
+import urllib.request, urllib.parse, urllib.error, http.cookiejar, time
 
 BASE = "https://my.telegram.org"
 jar = http.cookiejar.CookieJar()
@@ -14,9 +14,16 @@ op.addheaders = [("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537
                  ("X-Requested-With", "XMLHttpRequest"), ("Origin", BASE), ("Referer", BASE + "/auth")]
 
 
-def post(path, data):
-    with op.open(BASE + path, urllib.parse.urlencode(data).encode()) as r:
-        return r.read().decode("utf-8", "replace")
+def post(path, data, referer="/auth"):
+    req = urllib.request.Request(BASE + path, urllib.parse.urlencode(data).encode(),
+                                 headers={"Referer": BASE + referer,
+                                          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"})
+    try:
+        with op.open(req) as r:
+            return r.read().decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", "replace")
+        return f"HTTP {e.code}: " + re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", body)).strip()[:300]
 
 
 def get(path):
@@ -54,9 +61,10 @@ if show_codes(page):
 m = re.search(r'name="hash"\s+value="([^"]+)"', page)
 if not m:
     sys.exit("Не нашёл форму создания приложения. Начало страницы:\n" + re.sub(r"\s+", " ", page)[:500])
-r = post("/apps/create", {"hash": m.group(1), "app_title": "kursy3362", "app_shortname": "kursy3362",
-                          "app_url": "", "app_platform": "other", "app_desc": ""})
-if r.strip():
-    print("Ответ на создание:", re.sub(r"\s+", " ", r)[:300])
+time.sleep(2)
+form = {"hash": m.group(1), "app_title": "kursy3362", "app_shortname": "kursy3362",
+        "app_url": "", "app_platform": "other", "app_desc": "rates"}
+r = post("/apps/create", form, referer="/apps")
+print("Ответ сервера на создание:", r.strip()[:300] or "(пусто — это нормально)")
 if not show_codes(get("/apps")):
     sys.exit("Приложение не появилось — пришлите Claude текст ответа выше (без кодов входа).")
