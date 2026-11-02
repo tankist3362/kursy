@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-02 14:02",
+  "updated": "2026-11-02 14:54",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -9,7 +9,7 @@
     "quote": "BYN",
     "buy": {
      "rate": 2.952,
-     "count": 37,
+     "count": 34,
      "banks": [
       "БНБ-Банк",
       "БСБ Банк",
@@ -43,8 +43,8 @@
      ]
     },
     "sell": {
-     "rate": 2.952,
-     "count": 3,
+     "rate": 2.955,
+     "count": 5,
      "banks": [
       "БНБ-Банк",
       "Статусбанк"
@@ -52,11 +52,11 @@
      "places": [
       {
        "bank": "БНБ-Банк",
-       "branch": "ПОВ №12",
-       "addr": "просп. Партизанский, 79",
-       "lat": 53.8766,
-       "lon": 27.6259,
-       "phone": null
+       "branch": "ПОВ №8 РМ №8/2",
+       "addr": "ул. Налибокская, 36",
+       "lat": 53.9279,
+       "lon": 27.4328,
+       "phone": "+375(17)309-73-09"
       },
       {
        "bank": "Статусбанк",
@@ -68,11 +68,11 @@
       },
       {
        "bank": "БНБ-Банк",
-       "branch": "ПОВ №14",
-       "addr": "Новодворский с/с, район д. Большое Стиклево, 126",
-       "lat": 53.8669,
-       "lon": 27.6933,
-       "phone": null
+       "branch": "ПОВ №8 РМ №8/1",
+       "addr": "ул. Налибокская, 36",
+       "lat": 0.0,
+       "lon": 0.0,
+       "phone": "+375(17)309-73-09"
       }
      ]
     }
@@ -82,7 +82,7 @@
     "quote": "BYN",
     "buy": {
      "rate": 3.308,
-     "count": 28,
+     "count": 27,
      "banks": [
       "БНБ-Банк",
       "БСБ Банк",
@@ -116,19 +116,36 @@
      ]
     },
     "sell": {
-     "rate": 3.305,
-     "count": 1,
+     "rate": 3.308,
+     "count": 3,
      "banks": [
-      "Дабрабыт"
+      "БСБ Банк",
+      "Статусбанк"
      ],
      "places": [
       {
-       "bank": "Дабрабыт",
-       "branch": "Центральный офис",
-       "addr": "ул. Коммунистическая, 49",
-       "lat": 53.914,
-       "lon": 27.5526,
-       "phone": "+375(17)237-97-97"
+       "bank": "БСБ Банк",
+       "branch": "ПОВ №151",
+       "addr": "просп. Победителей, 23/4",
+       "lat": 53.911,
+       "lon": 27.5406,
+       "phone": "+375(17)306-20-40"
+      },
+      {
+       "bank": "Статусбанк",
+       "branch": "Обменный пункт №11",
+       "addr": "Долгиновский тракт, 178",
+       "lat": 53.9642,
+       "lon": 27.5359,
+       "phone": null
+      },
+      {
+       "bank": "БСБ Банк",
+       "branch": "Головной офис",
+       "addr": "просп. Победителей, 23/4",
+       "lat": 53.9111,
+       "lon": 27.5405,
+       "phone": "+375(17)306-20-40"
       }
      ]
     }
@@ -138,23 +155,13 @@
     "quote": "BYN",
     "buy": {
      "rate": 3.4803,
-     "count": 37,
+     "count": 20,
      "banks": [
-      "БСБ Банк",
       "Дабрабыт",
-      "Паритетбанк",
       "Статусбанк",
       "ТК Банк"
      ],
      "places": [
-      {
-       "bank": "БСБ Банк",
-       "branch": "Касса №184",
-       "addr": "просп. Победителей, 65",
-       "lat": 53.9244,
-       "lon": 27.5175,
-       "phone": "+375(17)306-20-40"
-      },
       {
        "bank": "Статусбанк",
        "branch": "Обменный пункт №18",
@@ -164,18 +171,26 @@
        "phone": null
       },
       {
-       "bank": "Паритетбанк",
-       "branch": "ПОВ №31",
-       "addr": "ул. Тимирязева, 114",
-       "lat": 53.9343,
-       "lon": 27.4578,
-       "phone": "171"
+       "bank": "Дабрабыт",
+       "branch": "Центральный офис",
+       "addr": "ул. Коммунистическая, 49",
+       "lat": 53.914,
+       "lon": 27.5526,
+       "phone": "+375(17)237-97-97"
+      },
+      {
+       "bank": "ТК Банк",
+       "branch": "Головной офис",
+       "addr": "ул. Тимирязева, 65а",
+       "lat": 53.9243,
+       "lon": 27.5093,
+       "phone": "+375(17)286-33-33"
       }
      ]
     },
     "sell": {
      "rate": 3.639,
-     "count": 7,
+     "count": 5,
      "banks": [
       "БНБ-Банк",
       "БСБ Банк",
@@ -192,11 +207,11 @@
       },
       {
        "bank": "БНБ-Банк",
-       "branch": "ПОВ №8 РМ №8/2",
-       "addr": "ул. Налибокская, 36",
-       "lat": 53.9279,
-       "lon": 27.4328,
-       "phone": "+375(17)309-73-09"
+       "branch": "ПОВ №12",
+       "addr": "просп. Партизанский, 79",
+       "lat": 53.8766,
+       "lon": 27.6259,
+       "phone": null
       },
       {
        "bank": "Статусбанк",
@@ -212,7 +227,7 @@
   }
  },
  "moscow": {
-  "updated": "2026-11-02 14:02",
+  "updated": "2026-11-02 14:54",
   "source": "ru.myfin.by",
   "rates": {
    "USD": {
@@ -229,14 +244,14 @@
        "bank": "Авангард",
        "branch": "ДО 'Монетчиковский'",
        "addr": "3-й Монетчиковский пер., д.11 стр.1",
-       "updated": "02.11.2026 10:15",
+       "updated": "02.11.2026 11:45",
        "link": "https://ru.myfin.by/bank/avangard/departments-list/moskva?mode=map&search_string=%D0%94%D0%9E+%27%D0%9C%D0%BE%D0%BD%D0%B5%D1%82%D1%87%D0%B8%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%27"
       },
       {
        "bank": "Авангард",
        "branch": "'Хамовники'",
        "addr": "ул. Усачева, д. 35, стр. 1",
-       "updated": "02.11.2026 10:15",
+       "updated": "02.11.2026 11:45",
        "link": "https://ru.myfin.by/bank/avangard/departments-list/moskva?mode=map&search_string=%27%D0%A5%D0%B0%D0%BC%D0%BE%D0%B2%D0%BD%D0%B8%D0%BA%D0%B8%27"
       }
      ]
@@ -262,7 +277,7 @@
     "per": 1,
     "quote": "RUB",
     "buy": {
-     "rate": 92.65,
+     "rate": 92.9,
      "count": 567,
      "banks": [
       "Банк ВТБ"
@@ -272,52 +287,38 @@
        "bank": "Банк ВТБ",
        "branch": "Дополнительный офис «Юго-Западный»",
        "addr": "проспект Вернадского, 105к3",
-       "updated": "02.11.2026 09:45",
+       "updated": "02.11.2026 11:45",
        "link": "https://ru.myfin.by/bank/vtb/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%AE%D0%B3%D0%BE-%D0%97%D0%B0%D0%BF%D0%B0%D0%B4%D0%BD%D1%8B%D0%B9%C2%BB"
       },
       {
        "bank": "Банк ВТБ",
        "branch": "Дополнительный офис «Южнобутовский»",
        "addr": "69, Москва, 117042",
-       "updated": "02.11.2026 09:45",
+       "updated": "02.11.2026 11:45",
        "link": "https://ru.myfin.by/bank/vtb/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%AE%D0%B6%D0%BD%D0%BE%D0%B1%D1%83%D1%82%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%C2%BB"
       },
       {
        "bank": "Банк ВТБ",
        "branch": "Дополнительный офис «Южный»",
        "addr": "Кировоградская улица, 14",
-       "updated": "02.11.2026 09:45",
+       "updated": "02.11.2026 11:45",
        "link": "https://ru.myfin.by/bank/vtb/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%AE%D0%B6%D0%BD%D1%8B%D0%B9%C2%BB"
       }
      ]
     },
     "sell": {
-     "rate": 92.29,
-     "count": 31,
+     "rate": 92.49,
+     "count": 1,
      "banks": [
       "КАМКОМБАНК"
      ],
      "places": [
       {
        "bank": "КАМКОМБАНК",
-       "branch": "Дополнительный офис «Вернадского»",
-       "addr": "проспект Вернадского, 33",
-       "updated": "02.11.2026 09:45",
-       "link": "https://ru.myfin.by/bank/kamkombank/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%92%D0%B5%D1%80%D0%BD%D0%B0%D0%B4%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%C2%BB"
-      },
-      {
-       "bank": "КАМКОМБАНК",
-       "branch": "Дополнительный офис «Бутырская»",
-       "addr": "улица Бутырская, 6",
-       "updated": "02.11.2026 09:45",
-       "link": "https://ru.myfin.by/bank/kamkombank/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%91%D1%83%D1%82%D1%8B%D1%80%D1%81%D0%BA%D0%B0%D1%8F%C2%BB"
-      },
-      {
-       "bank": "КАМКОМБАНК",
-       "branch": "Дополнительный офис «Люблинская»",
-       "addr": "улица Люблинская, 171",
-       "updated": "02.11.2026 09:45",
-       "link": "https://ru.myfin.by/bank/kamkombank/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%9B%D1%8E%D0%B1%D0%BB%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%C2%BB"
+       "branch": "Дополнительный офис «Каширское»",
+       "addr": "Каширское шоссе, 26к3",
+       "updated": "02.11.2026 11:00",
+       "link": "https://ru.myfin.by/bank/kamkombank/departments-list/moskva?mode=map&search_string=%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%BE%D1%84%D0%B8%D1%81+%C2%AB%D0%9A%D0%B0%D1%88%D0%B8%D1%80%D1%81%D0%BA%D0%BE%D0%B5%C2%BB"
       }
      ]
     }
