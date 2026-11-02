@@ -94,6 +94,30 @@ def msg_link(mid):
         return f"https://t.me/{CHAT}"
 
 
+def split_variants(parsed):
+    """{code: {...}} -> {"USD_BLUE"|"USD_WHITE"|"EUR": {"buy","sell","variant","rows","base"}}.
+    Синие/белые доллары: по подписи; без подписи из двух строк та, что дороже, — синие (новые)."""
+    res = {}
+    usd = parsed.get("USD")
+    if usd:
+        rows = usd.get("rows") or [{"variant": usd.get("variant", ""), "buy": usd.get("buy"), "sell": usd.get("sell")}]
+        blue = next((r for r in rows if "син" in r["variant"].lower() or "нов" in r["variant"].lower()), None)
+        white = next((r for r in rows if "бел" in r["variant"].lower() or "стар" in r["variant"].lower()), None)
+        rest = [r for r in rows if r is not blue and r is not white]
+        if rest and not blue and not white and len(rest) >= 2:
+            key = lambda r: (r.get("sell") or 0) + (r.get("buy") or 0)
+            blue, white = max(rest[:2], key=key), min(rest[:2], key=key)
+        elif rest and not blue:
+            blue = rest[0]
+        for k, r in (("USD_BLUE", blue), ("USD_WHITE", white)):
+            if r:
+                res[k] = {"buy": r.get("buy"), "sell": r.get("sell"), "variant": r["variant"], "rows": usd.get("rows", []), "base": "USD"}
+    if parsed.get("EUR"):
+        e = parsed["EUR"]
+        res["EUR"] = {"buy": e.get("buy"), "sell": e.get("sell"), "variant": e.get("variant", ""), "rows": e.get("rows", []), "base": "EUR"}
+    return res
+
+
 def build(msgs):
     now = time.time()
     today = datetime.datetime.now(MSK).date()
@@ -116,10 +140,10 @@ def build(msgs):
         parsed = parse_offer(m["text"])
         if not parsed:
             continue
-        offers.append({**m, "parsed": parsed})
+        offers.append({**m, "parsed": split_variants(parsed)})
 
     out = {}
-    for code in ("USD", "EUR"):
+    for code in ("USD_BLUE", "USD_WHITE", "EUR"):
         block = {}
         for side in ("sell", "buy"):              # sell: обменник продаёт = вы покупаете
             best = {}

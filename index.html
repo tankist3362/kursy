@@ -139,12 +139,14 @@ $("sw").addEventListener("click",()=>{flip=!flip;[a.value,b.value]=[b.value,a.va
 const NAMES={USD:"Доллар",EUR:"Евро",RUB:"Российский рубль",BYN:"Белорусский рубль"};
 const SRC={minsk:"https://select.by/minsk/kurs",moscow:"https://ru.myfin.by/currency/{c}/moskva"};
 let DATA=null,city="minsk",onlyOffice=true,act="buy",cur="USD";
-const CURS={minsk:["RUB","USD","EUR"],tg:["USD","EUR"]};
+const CURS={minsk:["RUB","USD","EUR"],tg:["USD_BLUE","USD_WHITE","EUR"]};
+const CUR_LABEL={RUB:"RUB (рос.)",USD_BLUE:"USD синие",USD_WHITE:"USD белые"};
+const baseCur=c=>c.startsWith("USD")?"USD":c;
 // «Купить валюту» = курс продажи у банка/обменника (side "sell"), «Продать» = курс покупки (side "buy")
 const sideOf=()=>act==="buy"?"sell":"buy";
 function renderPick(){
-  const list=CURS[city];if(!list.includes(cur))cur=list.includes("USD")?"USD":list[0];
-  $("curs").innerHTML=list.map(c=>`<button type="button" data-cur="${c}" aria-pressed="${c===cur}">${c==="RUB"?"RUB (рос.)":c}</button>`).join("");
+  const list=CURS[city];if(!list.includes(cur)){const b=baseCur(cur);cur=city==="tg"&&b==="USD"?"USD_BLUE":list.includes(b)?b:list[0]}
+  $("curs").innerHTML=list.map(c=>`<button type="button" data-cur="${c}" aria-pressed="${c===cur}">${CUR_LABEL[c]||c}</button>`).join("");
   $("curs").querySelectorAll("button").forEach(bt=>bt.addEventListener("click",()=>{cur=bt.dataset.cur;save();render()}));
   $("act").querySelectorAll("button").forEach(bt=>bt.setAttribute("aria-pressed",String(bt.dataset.act===act)));
 }
@@ -197,7 +199,8 @@ function render(){
 $("t-minsk").addEventListener("click",()=>{city="minsk";render();save()});
 $("t-tg").addEventListener("click",()=>{city="tg";render();save()});
 
-function offerHtml(o,code,side,hist){
+function offerHtml(o,key,side,hist){
+  const code=baseCur(key);
   const who=o.user?`<a href="https://t.me/${esc(o.user.slice(1))}" target="_blank" rel="noopener">${esc(o.user)}</a>`:esc(o.name||"без имени");
   const rep=(o.verified?`<span class="rep ok" title="метка администрации чата">${esc(o.tag||"обмен проверен")}</span> `:"")
     +(o.office?`<span class="rep ok" title="${esc(o.office)}">есть точка</span> `:"")
@@ -222,7 +225,8 @@ function renderTg(box){
   const r=(d.rates||{})[cur]||{};
   const f=o=>!onlyOffice||o.office||o.verified;
   const list=(r[sideOf()]||[]).filter(f).slice(0,12);
-  h+=`<div class="cx"><div class="side-h">${act==="buy"?`Купить ${cur} — обменники продают, дешевле сверху`:`Продать ${cur} — обменники покупают, дороже сверху`}</div>`;
+  const cl=CUR_LABEL[cur]||cur;
+  h+=`<div class="cx"><div class="side-h">${act==="buy"?`Купить ${cl} — обменники продают, дешевле сверху`:`Продать ${cl} — обменники покупают, дороже сверху`}</div>`;
   h+=list.length?list.map(o=>offerHtml(o,cur,sideOf(),d.history_days)).join(""):`<div class="side-h">За сутки нет объявлений${onlyOffice?" от проверенных или с точкой — снимите галочку, чтобы увидеть все":""}.</div>`;
   h+=`</div>`;
   box.innerHTML=h;
