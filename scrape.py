@@ -104,7 +104,7 @@ def minsk():
 
 # ---------------- Москва, ru.myfin.by ----------------
 MYFIN = "https://ru.myfin.by"
-MOS_CODES = ("USD", "EUR")
+MOS_CODES = ()   # банки Москвы отключены: на сайте только обменники из Telegram
 
 
 def moscow_currency(code):
