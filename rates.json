@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-02 06:55",
+  "updated": "2026-11-02 08:00",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -9,7 +9,7 @@
     "quote": "BYN",
     "buy": {
      "rate": 2.946,
-     "count": 13,
+     "count": 14,
      "banks": [
       "БНБ-Банк"
      ],
@@ -145,7 +145,7 @@
     "quote": "BYN",
     "buy": {
      "rate": 3.4803,
-     "count": 103,
+     "count": 104,
      "banks": [
       "Альфа-Банк",
       "БНБ-Банк",
@@ -205,7 +205,7 @@
   }
  },
  "moscow": {
-  "updated": "2026-11-02 06:55",
+  "updated": "2026-11-02 08:00",
   "source": "ru.myfin.by",
   "rates": {
    "USD": {
