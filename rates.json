@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-03 23:48",
+  "updated": "2026-11-04 00:46",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -9,7 +9,7 @@
     "quote": "BYN",
     "buy": {
      "rate": 2.978,
-     "count": 32,
+     "count": 18,
      "banks": [
       "БНБ-Банк",
       "БСБ Банк",
@@ -26,10 +26,10 @@
       },
       {
        "bank": "БНБ-Банк",
-       "branch": "ПОВ №1",
-       "addr": "ул. Корженевского, 26",
-       "lat": 53.8424,
-       "lon": 27.5292,
+       "branch": "УРМ Для бизнеса",
+       "addr": "пр. Независимости, 173",
+       "lat": 53.9416,
+       "lon": 27.6674,
        "phone": "+375(17)309-73-09"
       },
       {
@@ -345,10 +345,10 @@
  },
  "errors": [],
  "moscow_tg": {
-  "updated": "2026-11-03 23:49",
+  "updated": "2026-11-04 00:49",
   "source": "t.me/obmenvmsk",
   "scanned": 200,
-  "offers": 136,
+  "offers": 134,
   "history_days": 7,
   "rates": {
    "USD_BLUE": {
