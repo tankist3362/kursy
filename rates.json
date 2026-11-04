@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-04 02:41",
+  "updated": "2026-11-04 04:59",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -343,11 +343,9 @@
    }
   }
  },
- "errors": [
-  "Минск (select.by): <urlopen error [Errno 111] Connection refused>"
- ],
+ "errors": [],
  "moscow_tg": {
-  "updated": "2026-11-04 04:00",
+  "updated": "2026-11-04 05:00",
   "source": "t.me/obmenvmsk",
   "scanned": 200,
   "offers": 134,
