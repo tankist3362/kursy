@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-06 00:48",
+  "updated": "2026-11-06 01:50",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -312,9 +312,9 @@
  },
  "errors": [],
  "moscow_tg": {
-  "updated": "2026-11-06 00:48",
+  "updated": "2026-11-06 01:51",
   "source": "t.me/obmenvmsk",
-  "scanned": 199,
+  "scanned": 200,
   "offers": 129,
   "history_days": 7,
   "rates": {
