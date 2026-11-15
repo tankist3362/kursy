@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-15 13:45",
+  "updated": "2026-11-15 14:41",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -116,8 +116,9 @@
     },
     "sell": {
      "rate": 3.309,
-     "count": 31,
+     "count": 32,
      "banks": [
+      "БНБ-Банк",
       "БСБ Банк",
       "МТбанк",
       "Статусбанк"
@@ -132,19 +133,19 @@
        "phone": "+375(17)306-20-40"
       },
       {
+       "bank": "БНБ-Банк",
+       "branch": "Пункт обмена №2",
+       "addr": "Боровлянский с/с, 74/1",
+       "lat": 53.9652,
+       "lon": 27.6251,
+       "phone": null
+      },
+      {
        "bank": "Статусбанк",
        "branch": "Обменный пункт №18",
        "addr": "просп. Партизанский, 150а",
        "lat": 53.8598,
        "lon": 27.6738,
-       "phone": null
-      },
-      {
-       "bank": "МТбанк",
-       "branch": "РКЦ №37",
-       "addr": "просп. Партизанский, 150а",
-       "lat": 53.8602,
-       "lon": 27.6739,
        "phone": null
       }
      ]
@@ -329,7 +330,9 @@
    }
   }
  },
- "errors": [],
+ "errors": [
+  "Telegram: TimeoutError: Page.wait_for_selector: Timeout 45000ms exceeded.\nCall log:\n  - waiting for locator(\".bubble[data-mid]\") to be visible\n"
+ ],
  "moscow_tg": {
   "updated": "2026-11-15 13:46",
   "source": "t.me/obmenvmsk",
