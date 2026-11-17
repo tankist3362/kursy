@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-17 17:56",
+  "updated": "2026-11-17 18:57",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -95,30 +95,12 @@
      ]
     },
     "sell": {
-     "rate": 3.295,
-     "count": 13,
+     "rate": 3.291,
+     "count": 1,
      "banks": [
-      "БНБ-Банк",
-      "БСБ Банк",
       "Статусбанк"
      ],
      "places": [
-      {
-       "bank": "БНБ-Банк",
-       "branch": "ПОВ №3",
-       "addr": "ул. Шаранговича, 21",
-       "lat": 53.885,
-       "lon": 27.451,
-       "phone": null
-      },
-      {
-       "bank": "БСБ Банк",
-       "branch": "ПОВ №151",
-       "addr": "просп. Победителей, 23/4",
-       "lat": 53.911,
-       "lon": 27.5406,
-       "phone": "+375(17)306-20-40"
-      },
       {
        "bank": "Статусбанк",
        "branch": "Офис",
@@ -327,7 +309,9 @@
    }
   }
  },
- "errors": [],
+ "errors": [
+  "Telegram: TimeoutError: Page.wait_for_selector: Timeout 45000ms exceeded.\nCall log:\n  - waiting for locator(\".bubble[data-mid]\") to be visible\n"
+ ],
  "moscow_tg": {
   "updated": "2026-11-17 17:57",
   "source": "t.me/obmenvmsk",
