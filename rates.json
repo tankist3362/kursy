@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-18 20:57",
+  "updated": "2026-11-18 21:57",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -350,7 +350,9 @@
    }
   }
  },
- "errors": [],
+ "errors": [
+  "Telegram: TimeoutError: Page.wait_for_selector: Timeout 45000ms exceeded.\nCall log:\n  - waiting for locator(\".bubble[data-mid]\") to be visible\n"
+ ],
  "moscow_tg": {
   "updated": "2026-11-18 20:58",
   "source": "t.me/obmenvmsk",
