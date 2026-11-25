@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-25 13:36",
+  "updated": "2026-11-25 14:36",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -95,7 +95,7 @@
      ]
     },
     "sell": {
-     "rate": 3.28,
+     "rate": 3.285,
      "count": 1,
      "banks": [
       "Статусбанк"
@@ -117,15 +117,12 @@
     "quote": "BYN",
     "buy": {
      "rate": 3.4766,
-     "count": 81,
+     "count": 46,
      "banks": [
-      "Альфа-Банк",
       "БСБ Банк",
-      "Белгазпромбанк",
       "Дабрабыт",
       "Паритетбанк",
-      "Статусбанк",
-      "Цептер Банк"
+      "Статусбанк"
      ],
      "places": [
       {
@@ -137,20 +134,20 @@
        "phone": null
       },
       {
+       "bank": "БСБ Банк",
+       "branch": "ПОВ №151",
+       "addr": "просп. Победителей, 23/4",
+       "lat": 53.911,
+       "lon": 27.5406,
+       "phone": "+375(17)306-20-40"
+      },
+      {
        "bank": "Паритетбанк",
        "branch": "ПОВ №31",
        "addr": "ул. Тимирязева, 114",
        "lat": 53.9343,
        "lon": 27.4578,
        "phone": "171"
-      },
-      {
-       "bank": "Белгазпромбанк",
-       "branch": "Головной офис",
-       "addr": "ул. Притыцкого, 60/2",
-       "lat": 53.9089,
-       "lon": 27.4682,
-       "phone": "+375(17)229-16-16"
       }
      ]
     },
@@ -289,7 +286,9 @@
    }
   }
  },
- "errors": [],
+ "errors": [
+  "Telegram: TimeoutError: Page.wait_for_selector: Timeout 45000ms exceeded.\nCall log:\n  - waiting for locator(\".bubble[data-mid]\") to be visible\n"
+ ],
  "moscow_tg": {
   "updated": "2026-11-25 13:37",
   "source": "t.me/obmenvmsk",
