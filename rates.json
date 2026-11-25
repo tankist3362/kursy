@@ -1,6 +1,6 @@
 {
  "minsk": {
-  "updated": "2026-11-25 05:40",
+  "updated": "2026-11-25 07:06",
   "source": "select.by",
   "banks": 15,
   "rates": {
@@ -134,11 +134,12 @@
     "quote": "BYN",
     "buy": {
      "rate": 3.4766,
-     "count": 87,
+     "count": 94,
      "banks": [
       "Альфа-Банк",
       "БСБ Банк",
       "Белгазпромбанк",
+      "Дабрабыт",
       "МТбанк",
       "Паритетбанк",
       "Статусбанк",
@@ -307,7 +308,9 @@
    }
   }
  },
- "errors": [],
+ "errors": [
+  "Telegram: TimeoutError: Page.wait_for_selector: Timeout 45000ms exceeded.\nCall log:\n  - waiting for locator(\".bubble[data-mid]\") to be visible\n"
+ ],
  "moscow_tg": {
   "updated": "2026-11-25 05:41",
   "source": "t.me/obmenvmsk",
